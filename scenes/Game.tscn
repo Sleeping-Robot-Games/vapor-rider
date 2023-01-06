@@ -32,9 +32,42 @@ position = Vector2( 3, 0 )
 curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="YSort/PlayerPath2D"]
-position = Vector2( 17, 227 )
+position = Vector2( 197, 227 )
+offset = 180.0
 
 [node name="Player" parent="YSort/PlayerPath2D/PathFollow2D" instance=ExtResource( 1 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/PlayerPath2D/PathFollow2D"]
 anims/move_lane = SubResource( 4 )
+
+[node name="Lanes" type="Node2D" parent="YSort"]
+
+[node name="lane0" type="ColorRect" parent="YSort/Lanes"]
+margin_left = 19.0
+margin_top = 46.0
+margin_right = 20.0
+margin_bottom = 216.0
+
+[node name="lane1" type="ColorRect" parent="YSort/Lanes"]
+margin_left = 110.0
+margin_top = 46.0
+margin_right = 111.0
+margin_bottom = 217.0
+
+[node name="lane2" type="ColorRect" parent="YSort/Lanes"]
+margin_left = 200.0
+margin_top = 46.0
+margin_right = 201.0
+margin_bottom = 218.0
+
+[node name="lane3" type="ColorRect" parent="YSort/Lanes"]
+margin_left = 289.0
+margin_top = 46.0
+margin_right = 290.0
+margin_bottom = 218.0
+
+[node name="lane4" type="ColorRect" parent="YSort/Lanes"]
+margin_left = 379.0
+margin_top = 46.0
+margin_right = 380.0
+margin_bottom = 219.0

@@ -4,7 +4,7 @@ var speed = 10
 
 var player: bool = true
 
-var life_time = 2
+var life_time = .27 # Length of lane
 var life_spawn = 0
 
 var fire_direction: int
