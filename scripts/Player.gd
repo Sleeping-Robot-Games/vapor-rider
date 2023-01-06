@@ -14,7 +14,7 @@ func _ready():
 	animation = animation_player.get_animation('move_lane')
 	path_follow.offset = lanes[current_lane_index]
 
-func get_input(delta):
+func get_input():
 	if Input.is_action_pressed("right"):
 		if not animation_player.is_playing():
 			if current_lane_index != 4:
@@ -40,7 +40,7 @@ func get_input(delta):
 			shoot()
 
 func _physics_process(delta):
-	get_input(delta)
+	get_input()
 
 func shoot():
 	if not bullet_on_cooldown:
