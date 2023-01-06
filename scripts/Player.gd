@@ -5,7 +5,7 @@ var bullet_on_cooldown = false
 onready var path_follow = get_parent()
 onready var animation_player = get_parent().get_node("AnimationPlayer")
 
-var lanes = [0, 225, 450, 675, 900]
+var lanes = [0, 90, 180, 270, 360]
 var prev_lane_index
 var current_lane_index = 2
 var animation: Animation
@@ -46,7 +46,7 @@ func shoot():
 	if not bullet_on_cooldown:
 		var bullet_scene = preload("res://scenes/Bullet.tscn")
 		var bullet = bullet_scene.instance()
-		bullet.global_position = Vector2(global_position.x, global_position.y - 40)
+		bullet.global_position = Vector2(global_position.x, global_position.y - 20)
 		get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', bullet)
 		# Bullet cooldown
 		bullet_on_cooldown = true
