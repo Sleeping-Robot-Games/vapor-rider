@@ -1,10 +1,10 @@
 extends Node2D
 
-var speed = 5
+var speed = 4
 
 var player: bool = true
 
-var life_time = .6 # Length of lane
+var life_time = .55 # Length of lane
 var life_spawn = 0
 
 var fire_direction: int
@@ -14,7 +14,7 @@ func _ready():
 		speed = 5
 		fire_direction = -speed
 	else:
-		speed = 2.5
+		speed = 2
 		life_time = 2
 		rotation_degrees = 180
 		fire_direction = speed
