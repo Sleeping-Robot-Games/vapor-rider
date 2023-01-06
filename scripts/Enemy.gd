@@ -12,3 +12,8 @@ func _physics_process(delta):
 
 func dmg():
 	queue_free()
+
+
+func _on_MoveTimer_timeout():
+	pass # Replace with function body.
+	## NOTE: When moving LanePos4 will not be used. Created it for items to drop down to player

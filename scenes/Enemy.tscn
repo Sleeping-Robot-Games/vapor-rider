@@ -17,3 +17,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 0.458824, 0.458824, 1 )
 texture = ExtResource( 1 )
+
+[node name="MoveTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
