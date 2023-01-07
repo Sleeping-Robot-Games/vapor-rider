@@ -56,19 +56,23 @@ func find_spawn_point():
 	var n = random.randi_range(0, 4)
 	current_lane_num = n
 	current_vert_num = -1
-	## TODO: Use left and right spawn points as well - only pos0 for lane0 and 4
+	## TODO: Include left and right spawn points as well
 	return spawn_pos_points[n] 
 	
 func find_new_lane_pos():
-	# TODO: Make a 1/3 chance the enemy runs back up to the lane's spawn
+	## TODO: If an enemy is coming from a left/right spawn point make sure they only go to lane0/4 pos0
+	## TODO: Make a 1/3 chance the enemy runs back up to the lane's spawn
 	random.randomize()
 	var lane_offset = random.randi_range(-1, 1)
 	current_lane_num = min(4, max(0, current_lane_num + lane_offset))
 	
+	# If the enemy stays in the same lane include the spawn points as a target
 	var spawn_included = -1 if lane_offset == 0 else 0
+	# Finds a random position on the new lane
 	var rand_pos = random.randi_range(0 + spawn_included, 2)
 	current_vert_num = rand_pos
 	
+	# -1 means a spawn point is selected
 	if rand_pos == -1:
 		for spawn in spawn_pos_points:
 			if spawn.name == 'Spawn'+str(current_lane_num):
