@@ -13,6 +13,11 @@ _data = {
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 400.0
+margin_bottom = 240.0
+color = Color( 0, 0, 0, 1 )
+
 [node name="Beams" type="Sprite" parent="."]
 position = Vector2( 199, 120 )
 texture = ExtResource( 4 )

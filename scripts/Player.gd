@@ -40,13 +40,14 @@ func _physics_process(delta):
 	get_input()
 
 func shoot():
-	# TODO: Refactor to include CD but if a bullet is destroyed let the player fire another right away
 	if not bullet_on_cooldown:
 		var bullet_scene = preload("res://scenes/Bullet.tscn")
 		var bullet = bullet_scene.instance()
-		bullet.global_position = Vector2(global_position.x, global_position.y - 20)
+		bullet.global_position = Vector2(global_position.x, global_position.y - 15)
+		bullet.player = self
 		get_tree().get_root().get_node('Game/YSort').add_child(bullet)
 		bullet.fire(current_lane_index)
+		
 		# Bullet cooldown
 		bullet_on_cooldown = true
 		$ShootCooldown.start()

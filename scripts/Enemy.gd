@@ -44,8 +44,7 @@ func move():
 func shoot():
 	var bullet_scene = preload("res://scenes/Bullet.tscn")
 	var bullet = bullet_scene.instance()
-	bullet.player = false
-	bullet.global_position = Vector2(global_position.x, global_position.y + 20)
+	bullet.global_position = Vector2(global_position.x, global_position.y + 15)
 	get_parent().add_child(bullet)
 	bullet.fire(current_lane_num)
 

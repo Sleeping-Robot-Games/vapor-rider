@@ -2,13 +2,15 @@ extends Node2D
 
 var speed = 200
 
-var player: bool = true
+var player = null
 
 var target
 
 func _ready():
 	if not player:
 		speed = 100
+		$Area2D/Sprite.hide()
+		$Area2D/AnimatedSprite.show()
 		
 func set_target(lane_index):
 	var lane_group = 'top_lane' if player else 'bottom_lane'
@@ -29,6 +31,7 @@ func fire(lane_index):
 func _on_Area2D_body_entered(body):
 	if body.has_method('dmg'):
 		if player and "Enemy" in body.name:
+			player.bullet_on_cooldown = false
 			body.dmg()
 			queue_free()
 		elif not player and 'Player' in body.name:
