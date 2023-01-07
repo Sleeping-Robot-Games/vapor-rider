@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var random = RandomNumberGenerator.new()
 
-export var points = 25
+export var points = 48
 
 onready var tween = get_node("Tween")
 onready var game = get_node('/root/Game')

@@ -13,7 +13,8 @@ var score = 0
 ## TODO: Recreate end of level gameplay Beamrider does with the mothership thing at the top of the level
 
 func _ready():
-	$CanvasLayer/Enemies.text = "Enemies: " + str(total_enemies)
+	$CanvasLayer/Enemies.text = "%02d" % total_enemies
+	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
 
 func _on_EnemySpawnTimer_timeout():
 	spawn_enemy()
@@ -39,9 +40,9 @@ func spawn_astroids():
 
 func enemy_killed(points):
 	score += points
-	$CanvasLayer/Score.text = "Score: " + str(score)
+	$CanvasLayer/Score.text = "%06d" % score
 	total_enemies -= 1
-	$CanvasLayer/Enemies.text = "Enemies: " + str(total_enemies)
+	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	spawn_enemy()
 
 func _on_BeamTimer_timeout():

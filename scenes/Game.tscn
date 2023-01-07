@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/LoadingMenu.gd" type="Script" id=7]
 [ext_resource path="res://assets/star-1.png" type="Texture" id=8]
 [ext_resource path="res://assets/star-2.png" type="Texture" id=9]
+[ext_resource path="res://fonts/font_theme.tres" type="Theme" id=10]
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
@@ -222,16 +223,35 @@ scale = Vector2( 0.140625, 0.140625 )
 texture = ExtResource( 3 )
 
 [node name="Score" type="Label" parent="CanvasLayer"]
-margin_left = 1.0
-margin_right = 52.0
-margin_bottom = 14.0
-text = "Score: 0"
+margin_left = 309.0
+margin_top = 3.0
+margin_right = 390.0
+margin_bottom = 15.0
+theme = ExtResource( 10 )
+custom_colors/font_color = Color( 0.941176, 0.501961, 0.113725, 1 )
+text = "000000"
+align = 2
+
+[node name="Sector" type="Label" parent="CanvasLayer"]
+margin_left = 265.0
+margin_top = 18.0
+margin_right = 390.0
+margin_bottom = 30.0
+theme = ExtResource( 10 )
+custom_colors/font_color = Color( 0.941176, 0.501961, 0.113725, 1 )
+text = "01"
+align = 2
 
 [node name="Enemies" type="Label" parent="CanvasLayer"]
-margin_left = 320.0
-margin_right = 396.0
-margin_bottom = 14.0
-text = "Enemies: -1"
+margin_left = 9.0
+margin_top = 18.0
+margin_right = 34.0
+margin_bottom = 30.0
+theme = ExtResource( 10 )
+custom_colors/font_color = Color( 0.141176, 0.411765, 0.184314, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
+text = "00"
 
 [node name="LoadingMenu" type="Node2D" parent="CanvasLayer"]
 visible = false
