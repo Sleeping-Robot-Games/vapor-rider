@@ -5,7 +5,7 @@ var bullet_on_cooldown = false
 onready var path_follow = get_parent()
 onready var tween = get_node("Tween")
 
-var lanes = [0, 75, 150, 225, 300]
+var lanes = [0, 80.5, 161, 241.5, 322]
 var prev_lane_index
 var current_lane_index = 2
 var animation: Animation
@@ -45,7 +45,8 @@ func shoot():
 		var bullet_scene = preload("res://scenes/Bullet.tscn")
 		var bullet = bullet_scene.instance()
 		bullet.global_position = Vector2(global_position.x, global_position.y - 20)
-		get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', bullet)
+		get_tree().get_root().get_node('Game/YSort').add_child(bullet)
+		bullet.fire(current_lane_index)
 		# Bullet cooldown
 		bullet_on_cooldown = true
 		$ShootCooldown.start()

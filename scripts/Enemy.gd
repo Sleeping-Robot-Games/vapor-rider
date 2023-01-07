@@ -35,8 +35,7 @@ func move():
 	
 	# Calculate the scale based on the current vertical number
 	var new_scale = ([0.09, 0.15, 0.21, 0.27, 0.3])[clamp(current_vert_num + 1, 0, 4)]
-	print('new_scale: '+str(new_scale))
-	
+
 	tween.interpolate_property(self, "scale", self.scale, Vector2(new_scale, new_scale), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.interpolate_property(self, "position", prev_lane.global_position, current_lane.global_position, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
@@ -47,7 +46,8 @@ func shoot():
 	var bullet = bullet_scene.instance()
 	bullet.player = false
 	bullet.global_position = Vector2(global_position.x, global_position.y + 20)
-	get_parent().call_deferred('add_child', bullet)
+	get_parent().add_child(bullet)
+	bullet.fire(current_lane_num)
 
 func dmg():
 	queue_free()
@@ -57,7 +57,6 @@ func find_spawn_point():
 	var n = random.randi_range(0, 4)
 	current_lane_num = n
 	current_vert_num = -1
-	print('spawn point lane number is '+str(current_lane_num))
 	return spawn_pos_points[n] 
 	
 func find_new_lane_pos():
@@ -68,7 +67,6 @@ func find_new_lane_pos():
 	
 	var spawn_included = -1 if lane_offset == 0 else 0
 	var rand_pos = random.randi_range(0 + spawn_included, 2)
-	print(rand_pos)
 	current_vert_num = rand_pos
 	
 	if rand_pos == -1:
