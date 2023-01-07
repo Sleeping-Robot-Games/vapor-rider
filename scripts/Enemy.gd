@@ -53,18 +53,25 @@ func dmg():
 
 func find_spawn_point():
 	random.randomize()
-	var n = random.randi_range(0, 4)
+	var n = random.randi_range(0, 6)
 	current_lane_num = n
 	current_vert_num = -1
-	## TODO: Include left and right spawn points as well
-	return spawn_pos_points[n] 
+	return spawn_pos_points[n]
 	
 func find_new_lane_pos():
-	## TODO: If an enemy is coming from a left/right spawn point make sure they only go to lane0/4 pos0
+	# If an enemy just spawned in outer lane, they can only move inward to pos0
+	if current_lane_num == 0 or current_lane_num == 6:
+		current_lane_num = 1 if current_lane_num == 0 else 5
+		current_vert_num = 0
+		for lane in lane_pos_points:
+			if lane.name == 'Lane'+str(current_lane_num)+'Pos'+str(current_vert_num):
+				return lane
+	
 	## TODO: Make a 1/3 chance the enemy runs back up to the lane's spawn
 	random.randomize()
+	
 	var lane_offset = random.randi_range(-1, 1)
-	current_lane_num = min(4, max(0, current_lane_num + lane_offset))
+	current_lane_num = min(5, max(1, current_lane_num + lane_offset))
 	
 	# If the enemy stays in the same lane include the spawn points as a target
 	var spawn_included = -1 if lane_offset == 0 else 0
@@ -74,7 +81,8 @@ func find_new_lane_pos():
 	
 	# -1 means a spawn point is selected
 	if rand_pos == -1:
-		for spawn in spawn_pos_points:
+		var inner_spawn_points = spawn_pos_points.slice(1, 5)
+		for spawn in inner_spawn_points:
 			if spawn.name == 'Spawn'+str(current_lane_num):
 				return spawn
 	else:

@@ -46,7 +46,7 @@ func shoot():
 		bullet.global_position = Vector2(global_position.x, global_position.y - 15)
 		bullet.player = self
 		get_tree().get_root().get_node('Game/YSort').add_child(bullet)
-		bullet.fire(current_lane_index)
+		bullet.fire(current_lane_index + 1)
 		
 		# Bullet cooldown
 		bullet_on_cooldown = true
