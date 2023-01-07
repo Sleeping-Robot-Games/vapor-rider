@@ -2,7 +2,10 @@ extends KinematicBody2D
 
 var random = RandomNumberGenerator.new()
 
+export var points = 25
+
 onready var tween = get_node("Tween")
+onready var game = get_node('/root/Game')
 
 var spawn_pos_points = []
 var lane_pos_points = []
@@ -49,7 +52,7 @@ func shoot():
 
 func dmg():
 	dying = true
-	get_node('/root/Game').spawn_enemy()
+	game.enemy_killed(points)
 	queue_free()
 
 func find_spawn_point():

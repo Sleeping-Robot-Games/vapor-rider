@@ -221,6 +221,18 @@ position = Vector2( 139, 233.5 )
 scale = Vector2( 0.140625, 0.140625 )
 texture = ExtResource( 3 )
 
+[node name="Score" type="Label" parent="CanvasLayer"]
+margin_left = 1.0
+margin_right = 52.0
+margin_bottom = 14.0
+text = "Score: 0"
+
+[node name="Enemies" type="Label" parent="CanvasLayer"]
+margin_left = 320.0
+margin_right = 396.0
+margin_bottom = 14.0
+text = "Enemies: -1"
+
 [node name="LoadingMenu" type="Node2D" parent="CanvasLayer"]
 visible = false
 modulate = Color( 1, 1, 1, 0.909804 )
