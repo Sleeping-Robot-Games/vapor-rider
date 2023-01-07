@@ -114,19 +114,19 @@ position = Vector2( -0.00332642, -0.999939 )
 [node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
 position = Vector2( 40, 42 )
 
-[node name="Spawn1" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
+[node name="Spawn1" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 106, 42 )
 
-[node name="Spawn2" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
+[node name="Spawn2" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 153, 42 )
 
-[node name="Spawn3" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
+[node name="Spawn3" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 199, 42 )
 
-[node name="Spawn4" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
+[node name="Spawn4" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 247, 42 )
 
-[node name="Spawn5" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
+[node name="Spawn5" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 295, 42 )
 
 [node name="Spawn6" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
@@ -207,21 +207,6 @@ autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Life" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 104.5, 234 )
-scale = Vector2( 0.140625, 0.140625 )
-texture = ExtResource( 3 )
-
-[node name="Life2" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 122, 233.5 )
-scale = Vector2( 0.140625, 0.140625 )
-texture = ExtResource( 3 )
-
-[node name="Life3" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 139, 233.5 )
-scale = Vector2( 0.140625, 0.140625 )
-texture = ExtResource( 3 )
-
 [node name="Score" type="Label" parent="CanvasLayer"]
 margin_left = 309.0
 margin_top = 3.0
@@ -252,6 +237,42 @@ custom_colors/font_color = Color( 0.141176, 0.411765, 0.184314, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 0 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
 text = "00"
+
+[node name="Life" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 104.5, 234 )
+scale = Vector2( 0.140625, 0.140625 )
+texture = ExtResource( 3 )
+
+[node name="Life2" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 122, 233.5 )
+scale = Vector2( 0.140625, 0.140625 )
+texture = ExtResource( 3 )
+
+[node name="Life3" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 139, 233.5 )
+scale = Vector2( 0.140625, 0.140625 )
+texture = ExtResource( 3 )
+
+[node name="Missile" type="ColorRect" parent="CanvasLayer"]
+modulate = Color( 0.862745, 0.0156863, 0.192157, 1 )
+margin_left = 258.0
+margin_top = 229.0
+margin_right = 266.0
+margin_bottom = 237.0
+
+[node name="Missile2" type="ColorRect" parent="CanvasLayer"]
+modulate = Color( 0.862745, 0.0156863, 0.192157, 1 )
+margin_left = 274.0
+margin_top = 229.0
+margin_right = 282.0
+margin_bottom = 237.0
+
+[node name="Missile3" type="ColorRect" parent="CanvasLayer"]
+modulate = Color( 0.862745, 0.0156863, 0.192157, 1 )
+margin_left = 290.0
+margin_top = 229.0
+margin_right = 298.0
+margin_bottom = 237.0
 
 [node name="LoadingMenu" type="Node2D" parent="CanvasLayer"]
 visible = false

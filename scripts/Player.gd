@@ -1,17 +1,20 @@
 extends KinematicBody2D
 
-var bullet_on_cooldown = false
+var shoot_on_cooldown = false
 
 onready var path_follow = get_parent()
 onready var tween = get_node("Tween")
+onready var game = get_node('/root/Game')
 
 var lanes = [0, 80.5, 161, 241.5, 322]
 var prev_lane_index
 var current_lane_index = 2
 var animation: Animation
+var missiles = 3
 
 func _ready():
 	path_follow.offset = lanes[current_lane_index]
+	game.avail_missiles(missiles)
 	
 
 func get_input():
@@ -33,33 +36,43 @@ func get_input():
 				tween.start()
 	
 	if Input.is_action_just_pressed("shoot"):
-		if not tween.is_active():
-			shoot()
+		if not tween.is_active() and not shoot_on_cooldown:
+			shoot_bullet()
+	elif Input.is_action_just_pressed("missile"):
+		if not tween.is_active() and not shoot_on_cooldown:
+			shoot_missile()
 
 func _physics_process(delta):
 	get_input()
 
-func shoot():
-	if not bullet_on_cooldown:
-		var bullet_scene = preload("res://scenes/Bullet.tscn")
-		var bullet = bullet_scene.instance()
-		bullet.global_position = Vector2(global_position.x, global_position.y - 15)
-		bullet.player = self
-		get_tree().get_root().get_node('Game/YSort').add_child(bullet)
-		bullet.fire(current_lane_index + 1)
-		
-		# Bullet cooldown
-		bullet_on_cooldown = true
-		$ShootCooldown.start()
+func shoot_bullet():
+	var bullet_scene = preload("res://scenes/Bullet.tscn")
+	spawn_projectile(bullet_scene)
 
-func shoot_missle():
-	## TODO: When up arrow is pressed the player shoots a missle that destroys anything
-	### and goes all the way up to spawn points. Including motherships for extra points
-	pass
+func shoot_missile():
+	if missiles > 0:
+		var missile_scene = preload("res://scenes/Missile.tscn")
+		spawn_projectile(missile_scene)
+		missiles -= 1
+		game.avail_missiles(missiles)
+	else:
+		## TODO play no missile SFX
+		pass
+
+func spawn_projectile(projectile_scene):
+	var projectile = projectile_scene.instance()
+	projectile.global_position = Vector2(global_position.x, global_position.y - 15)
+	projectile.player = self
+	get_tree().get_root().get_node('Game/YSort').add_child(projectile)
+	projectile.fire(current_lane_index + 1)
+	
+	# Shoot cooldown
+	shoot_on_cooldown = true
+	$ShootCooldown.start()
 
 func dmg():
 	## TODO: When the player is hit, remove a life and start the level over
 	pass
 
 func _on_ShootCooldown_timeout():
-	bullet_on_cooldown = false
+	shoot_on_cooldown = false

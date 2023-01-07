@@ -49,3 +49,9 @@ func _on_BeamTimer_timeout():
 	var beam_scene = load("res://scenes/Beam.tscn")
 	var new_beam = beam_scene.instance()
 	get_node('Beams').add_child(new_beam)
+
+func avail_missiles(remaining):
+	$CanvasLayer/Missile.visible = remaining > 0
+	$CanvasLayer/Missile2.visible = remaining > 1
+	$CanvasLayer/Missile3.visible = remaining > 2
+

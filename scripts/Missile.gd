@@ -4,20 +4,16 @@ var speed = 200
 
 var player = null
 
-var target
+var target = null
 
 func _ready():
-	if not player:
-		speed = 100
-		$Area2D/Sprite.hide()
-		$Area2D/AnimatedSprite.show()
-		
+	pass
+
 func set_target(lane_index):
-	var lane_group = 'top_lane' if player else 'bottom_lane'
-	var lanes = get_tree().get_nodes_in_group(lane_group)
-	for lane_pos in lanes:
-		if 'Lane'+str(lane_index) in lane_pos.name:
-			target = lane_pos.global_position
+	var lanes = get_tree().get_nodes_in_group('missile_lane')
+	for spawn_pos in lanes:
+		if 'Spawn'+str(lane_index) in spawn_pos.name:
+			target = spawn_pos.global_position
 
 func fire(lane_index):
 	set_target(lane_index)
@@ -30,11 +26,11 @@ func fire(lane_index):
 
 func _on_Area2D_body_entered(body):
 	if body.has_method('dmg'):
-		if player and "Enemy" in body.name:
-			player.shoot_on_cooldown = false
+		if "Enemy" in body.name:
 			body.dmg()
 			queue_free()
-		elif not player and 'Player' in body.name:
+		elif "Mothership" in body.name:
+			## TODO: bonus points for mother ship?
 			body.dmg()
 			queue_free()
 
