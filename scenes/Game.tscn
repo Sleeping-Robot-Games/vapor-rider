@@ -1,27 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 17, 227, 0, 0, 0, 0, 381, 227 )
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "move_lane"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0 ]
+"points": PoolVector2Array( 0, 0, 0, 0, 48, 227, 0, 0, 0, 0, 349, 228 )
 }
 
 [node name="Game" type="Node2D"]
@@ -30,147 +14,138 @@ script = ExtResource( 2 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="PlayerPath2D" type="Path2D" parent="YSort"]
-position = Vector2( 3, 2 )
 curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="YSort/PlayerPath2D"]
-position = Vector2( 197, 227 )
-offset = 180.0
+position = Vector2( 122.985, 227.249 )
+rotation = 0.00332889
+offset = 75.0
 
 [node name="Player" parent="YSort/PlayerPath2D/PathFollow2D" instance=ExtResource( 1 )]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/PlayerPath2D/PathFollow2D"]
-anims/move_lane = SubResource( 4 )
 
 [node name="Lanes" type="Node2D" parent="YSort"]
 
 [node name="lane0" type="ColorRect" parent="YSort/Lanes"]
-margin_left = 19.0
-margin_top = 46.0
-margin_right = 20.0
-margin_bottom = 216.0
+margin_left = 47.0
+margin_top = 74.0
+margin_right = 48.0
+margin_bottom = 215.0
 
 [node name="lane1" type="ColorRect" parent="YSort/Lanes"]
-margin_left = 110.0
-margin_top = 46.0
-margin_right = 111.0
-margin_bottom = 217.0
+margin_left = 122.0
+margin_top = 74.0
+margin_right = 123.0
+margin_bottom = 215.0
 
 [node name="lane2" type="ColorRect" parent="YSort/Lanes"]
-margin_left = 200.0
-margin_top = 46.0
-margin_right = 201.0
-margin_bottom = 218.0
+margin_left = 197.0
+margin_top = 74.0
+margin_right = 198.0
+margin_bottom = 215.0
 
 [node name="lane3" type="ColorRect" parent="YSort/Lanes"]
-margin_left = 289.0
-margin_top = 46.0
-margin_right = 290.0
-margin_bottom = 218.0
+margin_left = 273.0
+margin_top = 74.0
+margin_right = 274.0
+margin_bottom = 215.0
 
 [node name="lane4" type="ColorRect" parent="YSort/Lanes"]
-margin_left = 379.0
-margin_top = 46.0
-margin_right = 380.0
-margin_bottom = 219.0
+margin_left = 348.0
+margin_top = 74.0
+margin_right = 349.0
+margin_bottom = 215.0
 
 [node name="EnemyPositionPoints" type="Node2D" parent="YSort"]
 
 [node name="Spawns" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
 [node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 20, 3 )
+position = Vector2( 47, 40 )
 
 [node name="Spawn1" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 110, 3 )
+position = Vector2( 122, 40 )
 
 [node name="Spawn2" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 200, 3 )
+position = Vector2( 197, 40 )
 
 [node name="Spawn3" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 288, 4 )
+position = Vector2( 271, 40 )
 
 [node name="Spawn4" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 379, 4 )
+position = Vector2( 347, 40 )
 
 [node name="Lanes" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
 [node name="Lane0Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 20, 45 )
+position = Vector2( 48, 74 )
 
 [node name="Lane0Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 20, 88 )
+position = Vector2( 48, 121 )
 
 [node name="Lane0Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 20, 133 )
-
-[node name="Lane0Pos3" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 20, 178 )
+position = Vector2( 48, 174 )
 
 [node name="Lane1Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 111, 45 )
+position = Vector2( 123, 74 )
 
 [node name="Lane1Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 111, 87 )
+position = Vector2( 123, 121 )
 
 [node name="Lane1Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 111, 132 )
-
-[node name="Lane1Pos3" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 111, 176 )
+position = Vector2( 123, 174 )
 
 [node name="Lane2Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 201, 45 )
+position = Vector2( 198, 74 )
 
 [node name="Lane2Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 201, 85 )
+position = Vector2( 198, 121 )
 
 [node name="Lane2Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 201, 130 )
-
-[node name="Lane2Pos3" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 201, 174 )
+position = Vector2( 198, 174 )
 
 [node name="Lane3Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 289, 45 )
+position = Vector2( 273, 74 )
 
 [node name="Lane3Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 289, 84 )
+position = Vector2( 273, 121 )
 
 [node name="Lane3Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 290, 130 )
-
-[node name="Lane3Pos3" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 289, 174 )
+position = Vector2( 274, 174 )
+rotation = 0.00540303
 
 [node name="Lane4Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 379, 45 )
+position = Vector2( 348, 74 )
 
 [node name="Lane4Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 379, 84 )
+position = Vector2( 348, 121 )
 
 [node name="Lane4Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 380, 130 )
-
-[node name="Lane4Pos3" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 380, 173 )
+position = Vector2( 349, 174 )
 
 [node name="Deliveries" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
 [node name="Lane0" type="Position2D" parent="YSort/EnemyPositionPoints/Deliveries"]
-position = Vector2( 20, 220 )
+position = Vector2( 48, 219 )
 
 [node name="Lane1" type="Position2D" parent="YSort/EnemyPositionPoints/Deliveries"]
-position = Vector2( 111, 220 )
+position = Vector2( 123, 219 )
 
 [node name="Lane2" type="Position2D" parent="YSort/EnemyPositionPoints/Deliveries"]
-position = Vector2( 201, 220 )
+position = Vector2( 198, 219 )
 
 [node name="Lane3" type="Position2D" parent="YSort/EnemyPositionPoints/Deliveries"]
-position = Vector2( 289, 219 )
+position = Vector2( 273, 219 )
 
 [node name="Lane4" type="Position2D" parent="YSort/EnemyPositionPoints/Deliveries"]
-position = Vector2( 379, 219 )
+position = Vector2( 348, 218 )
+
+[node name="OuterSpawns" type="Node2D" parent="YSort/EnemyPositionPoints"]
+
+[node name="Left" type="Position2D" parent="YSort/EnemyPositionPoints/OuterSpawns"]
+position = Vector2( -44, 113 )
+
+[node name="Right" type="Position2D" parent="YSort/EnemyPositionPoints/OuterSpawns"]
+position = Vector2( 442, 113 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 3.0
