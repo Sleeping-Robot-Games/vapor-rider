@@ -54,6 +54,7 @@ func shoot():
 
 
 func dmg():
+	## TODO: When the player is hit, remove a life and start the level over
 	pass
 
 func _on_ShootCooldown_timeout():
