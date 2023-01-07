@@ -10,9 +10,8 @@ var prev_lane:Position2D
 var current_lane: Position2D
 var current_lane_num: int
 var current_vert_num: int
-
 var move_pos_animation
-
+var dying = false
 	
 func _ready():
 	add_to_group("enemies")
@@ -49,6 +48,8 @@ func shoot():
 	bullet.fire(current_lane_num)
 
 func dmg():
+	dying = true
+	get_node('/root/Game').spawn_enemy()
 	queue_free()
 
 func find_spawn_point():

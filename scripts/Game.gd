@@ -17,14 +17,22 @@ var score = 0
 func _ready():
 	pass 
 
-## TODO: When an enemy is killed we need to send out another right away instead just on timer
 func _on_EnemySpawnTimer_timeout():
-	var enemies = get_tree().get_nodes_in_group("enemies")
+	spawn_enemy()
+
+func spawn_enemy():
+	# reset the timer in case fn is being called by a dying enemy
+	$EnemySpawnTimer.stop()
+	var enemies = []
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if !enemy.dying:
+			enemies.append(enemy)
 	if enemies.size() < max_enemies:
 		var enemy_scene = load("res://scenes/Enemy.tscn")
 		var new_enemy = enemy_scene.instance()
 		get_node('YSort').add_child(new_enemy)
 		new_enemy.spawn()
+	$EnemySpawnTimer.start()
 
 func spawn_astroids():
 	## TODO: After level 1 astroids spawn that go all the way down to delivery points to hit player
