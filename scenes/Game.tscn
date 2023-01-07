@@ -17,6 +17,9 @@ script = ExtResource( 2 )
 margin_right = 400.0
 margin_bottom = 240.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Beams" type="Sprite" parent="."]
 position = Vector2( 199, 120 )
@@ -42,64 +45,64 @@ position = Vector2( -0.00332642, -0.999939 )
 [node name="Spawns" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
 [node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 104, 31 )
+position = Vector2( 98, 42 )
 
 [node name="Spawn1" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 151, 31 )
+position = Vector2( 149, 42 )
 
 [node name="Spawn2" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 199, 31 )
+position = Vector2( 199, 42 )
 
 [node name="Spawn3" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 247, 31 )
+position = Vector2( 249, 42 )
 
 [node name="Spawn4" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 294, 31 )
+position = Vector2( 298, 42 )
 
 [node name="Lanes" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
 [node name="Lane0Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes" groups=["top_lane"]]
-position = Vector2( 91, 65 )
+position = Vector2( 88, 74 )
 
 [node name="Lane0Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 74, 112 )
+position = Vector2( 72, 117 )
 
 [node name="Lane0Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
 position = Vector2( 54, 165 )
 
 [node name="Lane1Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes" groups=["top_lane"]]
-position = Vector2( 145, 65 )
+position = Vector2( 144, 74 )
 
 [node name="Lane1Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 136, 112 )
+position = Vector2( 135, 117 )
 
 [node name="Lane1Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
 position = Vector2( 127, 165 )
 
 [node name="Lane2Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes" groups=["top_lane"]]
-position = Vector2( 199, 65 )
+position = Vector2( 199, 74 )
 
 [node name="Lane2Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 199, 112 )
+position = Vector2( 199, 117 )
 
 [node name="Lane2Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
 position = Vector2( 199, 165 )
 
 [node name="Lane3Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes" groups=["top_lane"]]
-position = Vector2( 253, 65 )
+position = Vector2( 255, 74 )
 
 [node name="Lane3Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 262, 112 )
+position = Vector2( 263, 117 )
 
 [node name="Lane3Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
 position = Vector2( 271, 165 )
 rotation = 0.00540303
 
 [node name="Lane4Pos0" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes" groups=["top_lane"]]
-position = Vector2( 306, 67 )
+position = Vector2( 310, 74 )
 
 [node name="Lane4Pos1" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
-position = Vector2( 324, 113 )
+position = Vector2( 325, 117 )
 
 [node name="Lane4Pos2" type="Position2D" parent="YSort/EnemyPositionPoints/Lanes"]
 position = Vector2( 344, 165 )
