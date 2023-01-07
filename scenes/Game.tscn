@@ -127,10 +127,10 @@ position = Vector2( 359, 209 )
 [node name="OuterSpawns" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
 [node name="Left" type="Position2D" parent="YSort/EnemyPositionPoints/OuterSpawns"]
-position = Vector2( -44, 113 )
+position = Vector2( -28, 74 )
 
 [node name="Right" type="Position2D" parent="YSort/EnemyPositionPoints/OuterSpawns"]
-position = Vector2( 442, 113 )
+position = Vector2( 428, 74 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 3.0

@@ -56,10 +56,11 @@ func find_spawn_point():
 	var n = random.randi_range(0, 4)
 	current_lane_num = n
 	current_vert_num = -1
+	## TODO: Use left and right spawn points as well - only pos0 for lane0 and 4
 	return spawn_pos_points[n] 
 	
 func find_new_lane_pos():
-	# TODO: Make a 1/3 chance the enemy shoots back up to their spawn
+	# TODO: Make a 1/3 chance the enemy runs back up to the lane's spawn
 	random.randomize()
 	var lane_offset = random.randi_range(-1, 1)
 	current_lane_num = min(4, max(0, current_lane_num + lane_offset))
