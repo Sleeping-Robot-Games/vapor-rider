@@ -52,6 +52,10 @@ func shoot():
 		bullet_on_cooldown = true
 		$ShootCooldown.start()
 
+func shoot_missle():
+	## TODO: When up arrow is pressed the player shoots a missle that destroys anything
+	### and goes all the way up to spawn points. Including motherships for extra points
+	pass
 
 func dmg():
 	## TODO: When the player is hit, remove a life and start the level over
