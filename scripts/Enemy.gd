@@ -67,28 +67,24 @@ func find_new_lane_pos():
 			if lane.name == 'Lane'+str(current_lane_num)+'Pos'+str(current_vert_num):
 				return lane
 	
-	## TODO: Make a 1/3 chance the enemy runs back up to the lane's spawn
+	# 1/3 chance the enemy runs back up to the lane's spawn
 	random.randomize()
-	
-	var lane_offset = random.randi_range(-1, 1)
-	current_lane_num = min(5, max(1, current_lane_num + lane_offset))
-	
-	# If the enemy stays in the same lane include the spawn points as a target
-	var spawn_included = -1 if lane_offset == 0 else 0
-	# Finds a random position on the new lane
-	var rand_pos = random.randi_range(0 + spawn_included, 2)
-	current_vert_num = rand_pos
-	
-	# -1 means a spawn point is selected
-	if rand_pos == -1:
+	var back_to_spawn = random.randi_range(-1, 1)
+	if back_to_spawn == 1:
+		current_vert_num = 0
 		var inner_spawn_points = spawn_pos_points.slice(1, 5)
 		for spawn in inner_spawn_points:
 			if spawn.name == 'Spawn'+str(current_lane_num):
 				return spawn
-	else:
-		for lane in lane_pos_points:
-			if lane.name == 'Lane'+str(current_lane_num)+'Pos'+str(rand_pos):
-				return lane
+	
+	# 2/3 chance to move to a random pos along current or adjascent lane
+	random.randomize()
+	var lane_offset = random.randi_range(-1, 1)
+	current_lane_num = min(5, max(1, current_lane_num + lane_offset))
+	current_vert_num = random.randi_range(0, 2)
+	for lane in lane_pos_points:
+		if lane.name == 'Lane'+str(current_lane_num)+'Pos'+str(current_vert_num):
+			return lane
 
 
 func _on_Tween_tween_all_completed():
