@@ -42,6 +42,7 @@ func _on_Tween_tween_all_completed():
 
 
 func _on_Area2D_area_entered(area):
-	if 'Asteroid' in area.get_parent().name:
-		area.get_parent().dmg()
+	var node = area.get_parent()
+	if 'Asteroid' in node.name or 'Homing' in node.name:
+		node.dmg()
 		queue_free()

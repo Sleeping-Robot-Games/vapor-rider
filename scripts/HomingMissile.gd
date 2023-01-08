@@ -51,6 +51,9 @@ func tween_me():
 	$Tween.interpolate_property(self, "position", position, target, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+func dmg():
+	queue_free()
+
 func _on_Tween_tween_all_completed():
 	var player_lane = player.current_lane_index + 1
 	var player_left = player_lane < target_lane

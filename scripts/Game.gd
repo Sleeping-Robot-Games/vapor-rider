@@ -1,5 +1,7 @@
 extends Node2D
 
+export var debug = true
+
 var random = RandomNumberGenerator.new()
 
 var player = null
@@ -14,10 +16,11 @@ var between_levels = false
 var homing_missiles_fired = 0
 
 func _ready():
+	if debug:
+		start_game()
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
-	#spawn_asteroid()
-	#spawn_mothership()
+
 
 func start_game():
 	$StartGameTimer.start()
@@ -25,6 +28,7 @@ func start_game():
 	
 	$EnemySpawnTimer.start()
 	player.disabled = false
+	##spawn_mothership()
 
 func restart_game():
 	# Once all lives are lost, send back to main menu

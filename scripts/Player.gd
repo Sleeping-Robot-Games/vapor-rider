@@ -30,8 +30,6 @@ func get_input():
 				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
 				$Sprite.material.set_shader_param("offset_texture", glitch_texture)
-				
-				game.emit_signal('player_moved')
 	if Input.is_action_pressed("left"):
 		if not tween.is_active():
 			if current_lane_index != 0:
@@ -40,8 +38,6 @@ func get_input():
 				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
 				$Sprite.material.set_shader_param("offset_texture", glitch_texture)
-				
-				game.emit_signal('player_moved')
 	
 	if Input.is_action_just_pressed("shoot"):
 		if not tween.is_active() and not shoot_on_cooldown:

@@ -1,8 +1,12 @@
 extends CanvasLayer
 
 onready var player = get_node('/root/Game/YSort/PlayerPath2D/PathFollow2D/Player')
+onready var game = get_parent()
 
 func _ready():
+	if game.debug:
+		$LoadingMenu.visible = false
+		return 
 	player.disabled = true
 	$LoadingMenu/AnimationPlayer.play("load")
 
