@@ -1,8 +1,9 @@
 extends Node2D
 
+var player = null
+
 var max_enemies = 3
 
-## TODO: A "Sector" is a level that is completed after all enemies are defeated
 var sector = 1
 var total_enemies = 15
 var score = 0
@@ -34,6 +35,12 @@ func spawn_enemy():
 		new_enemy.spawn()
 	$EnemySpawnTimer.start()
 
+func spawn_mothership():
+	var mothership_scene = load("res://scenes/Mothership.tscn")
+	var new_mothership = mothership_scene.instance()
+	get_node('YSort').add_child(new_mothership)
+	new_mothership.spawn()
+
 func spawn_astroids():
 	## TODO: After level 1 astroids spawn that go all the way down to delivery points to hit player
 	pass
@@ -43,7 +50,24 @@ func enemy_killed(points):
 	$CanvasLayer/Score.text = "%06d" % score
 	total_enemies -= 1
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
-	spawn_enemy()
+	if total_enemies > 0:
+		spawn_enemy()
+	else:
+		spawn_mothership()
+
+func mothership_killed(points):
+	score += points
+	$CanvasLayer/Score.text = "%06d" % score
+	load_next_sector()
+
+func load_next_sector():
+	sector += 1
+	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
+	total_enemies = 15
+	$CanvasLayer/Enemies.text = "%02d" % total_enemies
+	player.missiles = 3
+	avail_missiles(3)
+	
 
 func _on_BeamTimer_timeout():
 	var beam_scene = load("res://scenes/Beam.tscn")

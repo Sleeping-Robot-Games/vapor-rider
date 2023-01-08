@@ -15,6 +15,7 @@ var missiles = 3
 func _ready():
 	path_follow.offset = lanes[current_lane_index]
 	game.avail_missiles(missiles)
+	game.player = self
 	
 
 func get_input():

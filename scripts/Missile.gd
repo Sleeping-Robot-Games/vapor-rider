@@ -26,11 +26,7 @@ func fire(lane_index):
 
 func _on_Area2D_body_entered(body):
 	if body.has_method('dmg'):
-		if "Enemy" in body.name:
-			body.dmg()
-			queue_free()
-		elif "Mothership" in body.name:
-			## TODO: bonus points for mother ship?
+		if "Enemy" in body.name or "Mothership" in body.name:
 			body.dmg()
 			queue_free()
 
