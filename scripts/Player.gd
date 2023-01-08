@@ -72,8 +72,8 @@ func spawn_projectile(projectile_scene):
 	$ShootCooldown.start()
 
 func dmg():
-	## TODO: When the player is hit, remove a life and start the level over
-	pass
+	print('player dmged')
+	game.lose_life()
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false

@@ -13,11 +13,12 @@
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
-emission_box_extents = Vector3( 400, 0, 1 )
+emission_box_extents = Vector3( 100, 0, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 50, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+linear_accel = 1.0
 color = Color( 1, 1, 1, 0.196078 )
 
 [sub_resource type="Curve2D" id=3]
@@ -65,20 +66,48 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Star1" type="Particles2D" parent="."]
-visible = false
-position = Vector2( 200, 0 )
+[node name="StarRight1" type="Particles2D" parent="."]
+position = Vector2( 307, -10 )
+rotation = -0.261799
 scale = Vector2( 0.5, 0.5 )
-amount = 15
 lifetime = 4.5
 process_material = SubResource( 5 )
 texture = ExtResource( 8 )
 
-[node name="Star2" type="Particles2D" parent="."]
-visible = false
-position = Vector2( 200, 0 )
+[node name="StarRight2" type="Particles2D" parent="."]
+position = Vector2( 307, -10 )
+rotation = -0.230383
 scale = Vector2( 0.5, 0.5 )
-amount = 15
+lifetime = 4.5
+process_material = SubResource( 5 )
+texture = ExtResource( 9 )
+
+[node name="StarLeft1" type="Particles2D" parent="."]
+position = Vector2( 99, -10 )
+rotation = 0.261799
+scale = Vector2( 0.5, 0.5 )
+lifetime = 4.5
+process_material = SubResource( 5 )
+texture = ExtResource( 8 )
+
+[node name="StarLeft2" type="Particles2D" parent="."]
+position = Vector2( 99, -10 )
+rotation = 0.261799
+scale = Vector2( 0.5, 0.5 )
+lifetime = 4.5
+process_material = SubResource( 5 )
+texture = ExtResource( 9 )
+
+[node name="StarMid1" type="Particles2D" parent="."]
+position = Vector2( 199, -10 )
+scale = Vector2( 0.5, 0.5 )
+lifetime = 4.5
+process_material = SubResource( 5 )
+texture = ExtResource( 8 )
+
+[node name="StarMid2" type="Particles2D" parent="."]
+position = Vector2( 199, -10 )
+scale = Vector2( 0.5, 0.5 )
 lifetime = 4.5
 process_material = SubResource( 5 )
 texture = ExtResource( 9 )
@@ -112,7 +141,7 @@ position = Vector2( -0.00332642, -0.999939 )
 [node name="Spawns" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
 [node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 40, 42 )
+position = Vector2( -19, 74 )
 
 [node name="Spawn1" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 106, 42 )
@@ -130,7 +159,7 @@ position = Vector2( 247, 42 )
 position = Vector2( 295, 42 )
 
 [node name="Spawn6" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
-position = Vector2( 360, 42 )
+position = Vector2( 421, 74 )
 
 [node name="Lanes" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
@@ -198,12 +227,15 @@ position = Vector2( 280, 210 )
 position = Vector2( 359, 209 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [node name="BeamTimer" type="Timer" parent="."]
 wait_time = 0.7
 autostart = true
+
+[node name="PlayerReloadTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -306,3 +338,4 @@ anims/load = SubResource( 4 )
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="BeamTimer" to="." method="_on_BeamTimer_timeout"]
+[connection signal="timeout" from="PlayerReloadTimer" to="." method="_on_PlayerReloadTimer_timeout"]

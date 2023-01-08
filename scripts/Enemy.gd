@@ -15,6 +15,7 @@ var current_lane_num: int
 var current_vert_num: int
 var move_pos_animation
 var dying = false
+var ceasefire = false
 	
 func _ready():
 	add_to_group("enemies")
@@ -31,6 +32,7 @@ func spawn():
 	global_position = current_lane.global_position
 	move()
 	
+	# TODO: Include optional param on where to move to
 func move():
 	prev_lane = current_lane
 	current_lane = find_new_lane_pos()
@@ -38,7 +40,7 @@ func move():
 	# Calculate the scale based on the current vertical number
 	var new_scale = ([0.09, 0.15, 0.21, 0.27, 0.3])[clamp(current_vert_num + 1, 0, 4)]
 
-	tween.interpolate_property(self, "scale", self.scale, Vector2(new_scale, new_scale), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "scale", scale, Vector2(new_scale, new_scale), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.interpolate_property(self, "position", prev_lane.global_position, current_lane.global_position, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
 	tween.start()
@@ -51,9 +53,15 @@ func shoot():
 	bullet.fire(current_lane_num)
 
 func dmg():
+	# TODO: Flash background on death
+	# TODO: Death animation
 	dying = true
 	game.enemy_killed(points)
 	queue_free()
+
+func go_home():
+	# Send enemy to spawn point of their current lane to let the player reload
+	pass
 
 func find_spawn_point():
 	random.randomize()
@@ -93,6 +101,6 @@ func find_new_lane_pos():
 
 func _on_Tween_tween_all_completed():
 	var coin_toss = random.randi_range(0, 1)
-	if coin_toss == 1:
+	if not ceasefire and coin_toss == 1:
 		shoot()
 	move()
