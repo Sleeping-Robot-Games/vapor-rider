@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/beams.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Beam.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/pxArt.png" type="Texture" id=6]
-[ext_resource path="res://scripts/LoadingMenu.gd" type="Script" id=7]
+[ext_resource path="res://scripts/CanvasLayer.gd" type="Script" id=7]
 [ext_resource path="res://assets/star-1.png" type="Texture" id=8]
 [ext_resource path="res://assets/star-2.png" type="Texture" id=9]
 [ext_resource path="res://fonts/font_theme.tres" type="Theme" id=10]
@@ -134,10 +134,13 @@ _data = {
 [sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 11 )
 
+[sub_resource type="DynamicFont" id=27]
+size = 8
+font_data = ExtResource( 11 )
+
 [sub_resource type="Animation" id=4]
 resource_name = "load"
-length = 3.0
-loop = true
+length = 3.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:text")
 tracks/0/interp = 1
@@ -157,10 +160,93 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.3, 3 ),
+"times": PoolRealArray( 0, 2, 3.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.518838 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Label2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Label3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Label2:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5, 2.12175, 2.8, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Prepping synthesizers", "Prepping synthesizers.", "Prepping synthesizers..", "Prepping synthesizers..", "Prepping synthesizers.." ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Label3:text")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2.5, 3, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "generating nostalgia", "generating nostalgia.", "generating nostalgia..", "generating nostalgia..." ]
+}
+
+[sub_resource type="DynamicFont" id=28]
+size = 11
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=29]
+size = 25
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=30]
+resource_name = "title"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TitleRight:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 421, 74 ), Vector2( 220, 74 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TitleLeft:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -165, 74 ), Vector2( 50, 74 ) ]
 }
 
 [node name="Game" type="Node2D"]
@@ -235,8 +321,6 @@ modulate = Color( 1, 1, 1, 0.372549 )
 scale = Vector2( 0.8, 0.48 )
 frames = SubResource( 7 )
 animation = "prince"
-frame = 11
-playing = true
 centered = false
 
 [node name="Beams" type="Node2D" parent="."]
@@ -360,8 +444,10 @@ one_shot = true
 one_shot = true
 
 [node name="AsteroidTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 7 )
 
 [node name="GameOver" type="Label" parent="CanvasLayer"]
 visible = false
@@ -441,9 +527,6 @@ margin_right = 347.0
 margin_bottom = 235.0
 
 [node name="LoadingMenu" type="Node2D" parent="CanvasLayer"]
-visible = false
-modulate = Color( 1, 1, 1, 0.909804 )
-script = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/LoadingMenu"]
 margin_right = 400.0
@@ -454,15 +537,34 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="CanvasLayer/LoadingMenu"]
-margin_left = 29.0
-margin_top = 16.0
-margin_right = 69.0
-margin_bottom = 30.0
+margin_left = 19.0
+margin_top = 18.0
+margin_right = 293.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 27 )
 text = "Initializing Vaporwave Dimension"
+
+[node name="Label2" type="Label" parent="CanvasLayer/LoadingMenu"]
+visible = false
+margin_left = 19.0
+margin_top = 48.0
+margin_right = 293.0
+margin_bottom = 62.0
+custom_fonts/font = SubResource( 27 )
+text = "Prepping synthesizers"
+
+[node name="Label3" type="Label" parent="CanvasLayer/LoadingMenu"]
+visible = false
+margin_left = 19.0
+margin_top = 80.0
+margin_right = 293.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 27 )
+text = "generating nostalgia"
 
 [node name="PxArt" type="Sprite" parent="CanvasLayer/LoadingMenu"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 199, 127 )
+position = Vector2( 307, 139 )
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 6 )
 
@@ -470,9 +572,49 @@ texture = ExtResource( 6 )
 root_node = NodePath("../Label")
 anims/load = SubResource( 4 )
 
+[node name="StartMenu" type="Node2D" parent="CanvasLayer"]
+
+[node name="Space" type="Label" parent="CanvasLayer/StartMenu"]
+visible = false
+margin_left = 89.0
+margin_top = 164.0
+margin_right = 328.0
+margin_bottom = 180.0
+custom_fonts/font = SubResource( 28 )
+text = "Press space to start"
+
+[node name="TitleRight" type="Label" parent="CanvasLayer/StartMenu"]
+margin_left = 421.0
+margin_top = 74.0
+margin_right = 562.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 29 )
+text = "Rider"
+align = 1
+
+[node name="TitleLeft" type="Label" parent="CanvasLayer/StartMenu"]
+margin_left = -165.0
+margin_top = 74.0
+margin_right = -20.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 29 )
+text = "vaper"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/StartMenu"]
+anims/title = SubResource( 30 )
+
+[node name="PxArt" type="Sprite" parent="CanvasLayer"]
+visible = false
+position = Vector2( 112, 122 )
+scale = Vector2( 0.03, 0.03 )
+texture = ExtResource( 6 )
+
 [connection signal="animation_finished" from="PowerUpClips/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="BeamTimer" to="." method="_on_BeamTimer_timeout"]
 [connection signal="timeout" from="PlayerReloadTimer" to="." method="_on_PlayerReloadTimer_timeout"]
 [connection signal="timeout" from="MothershipTimer" to="." method="_on_MothershipTimer_timeout"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_AsteroidTimer_timeout"]
+[connection signal="animation_finished" from="CanvasLayer/LoadingMenu/AnimationPlayer" to="CanvasLayer" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="CanvasLayer/StartMenu/AnimationPlayer" to="CanvasLayer" method="_on_AnimationPlayer_animation_finished"]

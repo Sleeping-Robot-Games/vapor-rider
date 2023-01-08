@@ -22,8 +22,11 @@ func fire(lane_index):
 	$Tween.interpolate_property(self, "position", position, target, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+
+func dmg():
+	queue_free()
+
 func _on_Area2D_body_entered(body):
-	print(body)
 	if body.has_method('dmg'):
 		if 'Player' in body.name and not body.disabled:
 			body.dmg()
@@ -31,3 +34,4 @@ func _on_Area2D_body_entered(body):
 
 func _on_Tween_tween_all_completed():
 	queue_free()
+

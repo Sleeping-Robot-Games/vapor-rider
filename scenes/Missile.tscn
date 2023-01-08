@@ -149,10 +149,11 @@ shape = SubResource( 1 )
 visible = false
 scale = Vector2( 0.025, 0.025 )
 frames = SubResource( 25 )
-frame = 22
+frame = 21
 playing = true
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

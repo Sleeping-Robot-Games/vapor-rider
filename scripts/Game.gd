@@ -19,7 +19,7 @@ func _ready():
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
 	#spawn_asteroid()
-	spawn_mothership()
+	#spawn_mothership()
 
 func _on_EnemySpawnTimer_timeout():
 	spawn_enemy()
@@ -57,19 +57,21 @@ func _on_MothershipTimer_timeout():
 	new_h_missile.call_deferred('fire', player.current_lane_index + 1)
 	homing_missiles_fired += 1
 	
-	
 func spawn_asteroid():
-	# TODO: After level 1 astroids spawn that go all the way down to delivery points to hit player
-	#if sector > 1 and not between_levels:
-	random.randomize()
-	var n = random.randi_range(0, 4)
-	var spawn = get_tree().get_nodes_in_group('missile_lane')[n]
-	var asteroid_scene = load('res://scenes/Asteroid.tscn')
-	var new_asteroid = asteroid_scene.instance()
-	new_asteroid.global_position = spawn.global_position
-	get_node("YSort").call_deferred('add_child', new_asteroid)
-	new_asteroid.call_deferred('fire', spawn.name[5])
-	
+	if sector == 5:
+		# Increase astroid frequency
+		$AsteroidTimer.wait_time = 3
+	if sector == 10:
+		$AsteroidTimer.wait_time = 2
+	if not between_levels and not player.disabled:
+		random.randomize()
+		var n = random.randi_range(0, 4)
+		var spawn = get_tree().get_nodes_in_group('missile_lane')[n]
+		var asteroid_scene = load('res://scenes/Asteroid.tscn')
+		var new_asteroid = asteroid_scene.instance()
+		new_asteroid.global_position = spawn.global_position
+		get_node("YSort").call_deferred('add_child', new_asteroid)
+		new_asteroid.call_deferred('fire', spawn.name[5])
 
 func _on_AsteroidTimer_timeout():
 	spawn_asteroid()
@@ -87,6 +89,7 @@ func enemy_killed(points):
 func mothership_killed(points):
 	score += points
 	$CanvasLayer/Score.text = "%06d" % score
+	## TODO: Load next sector after all the mothership missiles are gone not when mothership is dead
 	load_next_sector()
 
 func load_next_sector():
@@ -97,6 +100,8 @@ func load_next_sector():
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	player.missiles = 3
 	avail_missiles(3)
+	if sector == 2:
+		$AsteroidTimer.start()
 
 func lose_life():
 	player.get_node('AnimationPlayer').play('die')
@@ -115,6 +120,7 @@ func lose_life():
 func power_up(type):
 	if type == "lets_go_crazy":
 		$PowerUpClips/AnimatedSprite.visible = true
+		$PowerUpClips/AnimatedSprite.playing = true
 		var lanes = get_tree().get_nodes_in_group('bottom_lane')
 		for n in range(0,5):
 			var missile_scene = preload("res://scenes/Missile.tscn")

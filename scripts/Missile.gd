@@ -30,11 +30,18 @@ func fire(lane_index, cdrom = false):
 	$Tween.start()
 
 func _on_Area2D_body_entered(body):
+	print(body)
 	if body.has_method('dmg'):
-		if "Enemy" in body.name or "Mothership" in body.name:
+		if "Enemy" in body.name or "Mothership" in body.name or 'Asteroid' in body.name:
 			body.dmg()
 			queue_free()
 
 
 func _on_Tween_tween_all_completed():
 	queue_free()
+
+
+func _on_Area2D_area_entered(area):
+	if 'Asteroid' in area.get_parent().name:
+		area.get_parent().dmg()
+		queue_free()
