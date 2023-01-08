@@ -610,6 +610,10 @@ position = Vector2( 112, 122 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 6 )
 
+[node name="StartGameTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="animation_finished" from="PowerUpClips/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="BeamTimer" to="." method="_on_BeamTimer_timeout"]

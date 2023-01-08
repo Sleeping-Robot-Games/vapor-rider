@@ -21,6 +21,22 @@ func _ready():
 	#spawn_asteroid()
 	#spawn_mothership()
 
+func start_game():
+	$StartGameTimer.start()
+	yield($StartGameTimer, "timeout")
+	
+	$EnemySpawnTimer.start()
+	player.disabled = false
+
+func restart_game():
+	# Once all lives are lost, send back to main menu
+	sector = 1
+	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
+	total_enemies = 15
+	$CanvasLayer/Enemies.text = "%02d" % total_enemies
+	player.missiles = 3
+	avail_missiles(3)
+
 func _on_EnemySpawnTimer_timeout():
 	spawn_enemy()
 
