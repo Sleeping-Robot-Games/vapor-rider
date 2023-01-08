@@ -15,29 +15,27 @@ var lives = 3
 var between_levels = false
 var homing_missiles_fired = 0
 
+var game_over = false
+
 func _ready():
 	if debug:
 		start_game()
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
 
+func _input(event):
+	if game_over:
+		if Input.is_action_just_pressed("shoot"):
+			restart_game()
 
 func start_game():
+	print('in start game')
 	$StartGameTimer.start()
 	yield($StartGameTimer, "timeout")
 	
 	$EnemySpawnTimer.start()
 	player.disabled = false
 	##spawn_mothership()
-
-func restart_game():
-	# Once all lives are lost, send back to main menu
-	sector = 1
-	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
-	total_enemies = 15
-	$CanvasLayer/Enemies.text = "%02d" % total_enemies
-	player.missiles = 3
-	avail_missiles(3)
 
 func _on_EnemySpawnTimer_timeout():
 	spawn_enemy()
@@ -148,8 +146,27 @@ func power_up(type):
 			cdrom.call_deferred('fire', n + 1, true)
 
 func game_over():
-	# TODO: Implement reset option
+	game_over = true
 	$CanvasLayer/GameOver.show()
+	$EnemySpawnTimer.stop()
+	$AsteroidTimer.stop()
+
+func restart_game():
+	$CanvasLayer/GameOver.hide()
+	game_over = false
+	# Once all lives are lost, send back to main menu
+	sector = 1
+	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
+	total_enemies = 15
+	$CanvasLayer/Enemies.text = "%02d" % total_enemies
+	player.missiles = 3
+	avail_missiles(3)
+	for enemy in get_tree().get_nodes_in_group('enemies'):
+		enemy.queue_free()
+	player.get_node('Sprite').modulate = Color(1, 1, 1)
+	player.reset_position()
+	
+	$CanvasLayer.play_title_menu()
 
 func _on_BeamTimer_timeout():
 	var beam_scene = load("res://scenes/Beam.tscn")

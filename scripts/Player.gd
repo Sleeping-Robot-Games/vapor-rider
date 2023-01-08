@@ -19,6 +19,9 @@ func _ready():
 	game.avail_missiles(missiles)
 	game.player = self
 
+func reset_position():
+	path_follow.offset = lanes[2]
+
 func get_input():
 	if disabled:
 		return
