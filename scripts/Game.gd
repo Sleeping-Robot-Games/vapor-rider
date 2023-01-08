@@ -88,8 +88,8 @@ func power_up(type):
 			var missile_scene = preload("res://scenes/Missile.tscn")
 			var cdrom = missile_scene .instance()			
 			cdrom.global_position = Vector2(lanes[n].global_position.x, lanes[n].global_position.y + 15)
-			get_tree().get_root().get_node('Game/YSort').add_child(cdrom)
-			cdrom.fire(n + 1, true)
+			get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', cdrom)
+			cdrom.call_deferred('fire', n + 1, true)
 
 func game_over():
 	# TODO: Implement reset option

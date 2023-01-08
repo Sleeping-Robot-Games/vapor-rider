@@ -83,3 +83,6 @@ func _on_ShootCooldown_timeout():
 # apply glitch effect when changing lanes
 func _on_Tween_tween_all_completed():
 	$Sprite.material.set_shader_param("offset_texture", null)
+	
+	# Let the player shoot right after they switch lanes
+	shoot_on_cooldown = false

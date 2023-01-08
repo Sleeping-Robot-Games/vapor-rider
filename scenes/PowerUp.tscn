@@ -224,7 +224,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 5 )
-frame = 26
+frame = 42
 speed_scale = 2.0
 playing = true
 
