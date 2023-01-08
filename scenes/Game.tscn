@@ -344,7 +344,7 @@ position = Vector2( -0.00332642, -0.999939 )
 
 [node name="Spawns" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
-[node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["homing_missle_spawns"]]
+[node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["homing_missile_spawns"]]
 position = Vector2( -19, 74 )
 
 [node name="Spawn1" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
@@ -362,7 +362,7 @@ position = Vector2( 247, 42 )
 [node name="Spawn5" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 295, 42 )
 
-[node name="Spawn6" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["homing_missle_spawns"]]
+[node name="Spawn6" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["homing_missile_spawns"]]
 position = Vector2( 421, 74 )
 
 [node name="Lanes" type="Node2D" parent="YSort/EnemyPositionPoints"]
@@ -441,7 +441,6 @@ wait_time = 3.0
 one_shot = true
 
 [node name="MothershipTimer" type="Timer" parent="."]
-one_shot = true
 
 [node name="AsteroidTimer" type="Timer" parent="."]
 wait_time = 5.0

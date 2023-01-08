@@ -13,8 +13,6 @@ var lives = 3
 var between_levels = false
 var homing_missiles_fired = 0
 
-signal player_moved
-
 func _ready():
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
@@ -70,7 +68,7 @@ func _on_MothershipTimer_timeout():
 	var new_h_missile = homing_missile_scene.instance()
 	# mother ship homing missiles randomly spawn from left or right and goes to the current_lane the player is in
 	get_node("YSort").call_deferred('add_child', new_h_missile)
-	new_h_missile.call_deferred('fire', player.current_lane_index + 1)
+	new_h_missile.call_deferred('fire')#, player.current_lane_index + 1)
 	homing_missiles_fired += 1
 	
 func spawn_asteroid():
