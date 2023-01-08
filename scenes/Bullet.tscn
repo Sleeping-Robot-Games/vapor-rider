@@ -46,7 +46,7 @@ shape = SubResource( 1 )
 visible = false
 scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 speed_scale = 2.0
 playing = true
 

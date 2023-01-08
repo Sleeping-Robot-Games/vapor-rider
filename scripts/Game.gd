@@ -1,5 +1,7 @@
 extends Node2D
 
+var random = RandomNumberGenerator.new()
+
 var player = null
 
 var max_enemies = 3
@@ -8,6 +10,7 @@ var sector = 1
 var total_enemies = 15
 var score = 0
 var lives = 3
+var between_levels = false
 var homing_missiles_fired = 0
 
 signal player_moved
@@ -15,6 +18,7 @@ signal player_moved
 func _ready():
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
+	#spawn_asteroid()
 	spawn_mothership()
 
 func _on_EnemySpawnTimer_timeout():
@@ -43,7 +47,7 @@ func spawn_mothership():
 	$MothershipTimer.start()
 	
 
-func _on_MothershipTImer_timeout():
+func _on_MothershipTimer_timeout():
 	if homing_missiles_fired > 4:
 		$MothershipTimer.stop()
 	var homing_missile_scene = load('res://scenes/HomingMissile.tscn')
@@ -54,9 +58,21 @@ func _on_MothershipTImer_timeout():
 	homing_missiles_fired += 1
 	
 	
-func spawn_astroids():
-	## TODO: After level 1 astroids spawn that go all the way down to delivery points to hit player
-	pass
+func spawn_asteroid():
+	# TODO: After level 1 astroids spawn that go all the way down to delivery points to hit player
+	#if sector > 1 and not between_levels:
+	random.randomize()
+	var n = random.randi_range(0, 4)
+	var spawn = get_tree().get_nodes_in_group('missile_lane')[n]
+	var asteroid_scene = load('res://scenes/Asteroid.tscn')
+	var new_asteroid = asteroid_scene.instance()
+	new_asteroid.global_position = spawn.global_position
+	get_node("YSort").call_deferred('add_child', new_asteroid)
+	new_asteroid.call_deferred('fire', spawn.name[5])
+	
+
+func _on_AsteroidTimer_timeout():
+	spawn_asteroid()
 
 func enemy_killed(points):
 	score += points
@@ -134,3 +150,4 @@ func _on_PlayerReloadTimer_timeout():
 
 func _on_AnimatedSprite_animation_finished():
 	$PowerUpClips/AnimatedSprite.visible = false
+

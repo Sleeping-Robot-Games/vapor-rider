@@ -235,7 +235,7 @@ modulate = Color( 1, 1, 1, 0.372549 )
 scale = Vector2( 0.8, 0.48 )
 frames = SubResource( 7 )
 animation = "prince"
-frame = 1
+frame = 18
 playing = true
 centered = false
 
@@ -359,6 +359,8 @@ one_shot = true
 [node name="MothershipTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="AsteroidTimer" type="Timer" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameOver" type="Label" parent="CanvasLayer"]
@@ -472,4 +474,5 @@ anims/load = SubResource( 4 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="BeamTimer" to="." method="_on_BeamTimer_timeout"]
 [connection signal="timeout" from="PlayerReloadTimer" to="." method="_on_PlayerReloadTimer_timeout"]
-[connection signal="timeout" from="MothershipTimer" to="." method="_on_MothershipTImer_timeout"]
+[connection signal="timeout" from="MothershipTimer" to="." method="_on_MothershipTimer_timeout"]
+[connection signal="timeout" from="AsteroidTimer" to="." method="_on_AsteroidTimer_timeout"]
