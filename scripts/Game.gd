@@ -81,6 +81,7 @@ func lose_life():
 		$PlayerReloadTimer.start()
 
 func game_over():
+	# TODO: Implement reset option
 	$CanvasLayer/GameOver.show()
 
 func _on_BeamTimer_timeout():
