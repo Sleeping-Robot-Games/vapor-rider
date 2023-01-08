@@ -1,6 +1,6 @@
 extends Node2D
 
-export var debug = true
+export var debug = false
 
 var random = RandomNumberGenerator.new()
 
@@ -9,7 +9,7 @@ var player = null
 var max_enemies = 3
 
 var sector = 1
-var total_enemies = 1
+var total_enemies = 15
 var score = 0
 var lives = 3
 var between_levels = false
