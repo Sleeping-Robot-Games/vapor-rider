@@ -636,7 +636,7 @@ margin_top = 74.0
 margin_right = -20.0
 margin_bottom = 99.0
 custom_fonts/font = SubResource( 29 )
-text = "vaper"
+text = "vapor"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/StartMenu"]
