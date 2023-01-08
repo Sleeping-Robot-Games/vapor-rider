@@ -14,6 +14,10 @@ config/name="Vapor Rider"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.PNG"
 
+[autoload]
+
+g="*res://scripts/Global.gd"
+
 [display]
 
 window/size/width=400

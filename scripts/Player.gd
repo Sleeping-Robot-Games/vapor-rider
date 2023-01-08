@@ -55,6 +55,7 @@ func _physics_process(_delta):
 func shoot_bullet():
 	var bullet_scene = preload("res://scenes/Bullet.tscn")
 	spawn_projectile(bullet_scene)
+	g.play_sfx("laser")
 
 func shoot_missile():
 	if missiles > 0:
