@@ -28,5 +28,3 @@ func dmg():
 	game.mothership_killed(points)
 	queue_free()
 
-func _on_Tween_tween_all_completed():
-	game.load_next_sector()

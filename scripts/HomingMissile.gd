@@ -52,6 +52,7 @@ func tween_me():
 	$Tween.start()
 
 func dmg():
+	game.emit_signal('homing_missile_dead')
 	queue_free()
 
 func _on_Tween_tween_all_completed():
@@ -61,7 +62,7 @@ func _on_Tween_tween_all_completed():
 	var player_right = player_lane > target_lane
 	
 	if target_pos == 3:
-		queue_free()
+		dmg()
 	elif going_down_lane or player_down:
 		going_down_lane = true
 		move(target_lane, target_pos + 1)
@@ -74,4 +75,4 @@ func _on_Area2D_body_entered(body):
 	if body.has_method('dmg'):
 		if "Player" in body.name:
 			body.dmg()
-			queue_free()
+			dmg()

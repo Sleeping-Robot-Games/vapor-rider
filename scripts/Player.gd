@@ -21,6 +21,7 @@ func _ready():
 
 func reset_position():
 	path_follow.offset = lanes[2]
+	current_lane_index = 2
 
 func get_input():
 	if disabled:

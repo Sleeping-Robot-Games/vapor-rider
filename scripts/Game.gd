@@ -9,17 +9,23 @@ var player = null
 var max_enemies = 3
 
 var sector = 1
-var total_enemies = 15
+var total_enemies = 1
 var score = 0
 var lives = 3
 var between_levels = false
 var homing_missiles_fired = 0
+var homing_missiles_destroyed = 0
 
 var game_over = false
+
+signal homing_missile_dead
 
 func _ready():
 	if debug:
 		start_game()
+	
+	connect("homing_missile_dead", self, 'on_homing_missile_dead')
+	
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
 
@@ -34,11 +40,18 @@ func start_game():
 	yield($StartGameTimer, "timeout")
 	
 	$EnemySpawnTimer.start()
+	#spawn_mothership()
 	player.disabled = false
-	##spawn_mothership()
 
 func _on_EnemySpawnTimer_timeout():
 	spawn_enemy()
+
+func on_homing_missile_dead():
+	homing_missiles_destroyed += 1
+	if homing_missiles_destroyed == 6:
+		load_next_sector()
+		$CanvasLayer/AnimationPlayer.play("new_sector")
+		print('playing new_sector')
 
 func spawn_enemy():
 	# reset the timer in case fn is being called by a dying enemy
@@ -64,13 +77,13 @@ func spawn_mothership():
 	
 
 func _on_MothershipTimer_timeout():
-	if homing_missiles_fired > 4:
+	if homing_missiles_fired == 5:
 		$MothershipTimer.stop()
 	var homing_missile_scene = load('res://scenes/HomingMissile.tscn')
 	var new_h_missile = homing_missile_scene.instance()
 	# mother ship homing missiles randomly spawn from left or right and goes to the current_lane the player is in
 	get_node("YSort").call_deferred('add_child', new_h_missile)
-	new_h_missile.call_deferred('fire')#, player.current_lane_index + 1)
+	new_h_missile.call_deferred('fire')
 	homing_missiles_fired += 1
 	
 func spawn_asteroid():
@@ -98,25 +111,27 @@ func enemy_killed(points):
 	total_enemies -= 1
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	if total_enemies > 0:
-		spawn_enemy()
+		pass
+		#spawn_enemy()
 	else:
+		$AsteroidTimer.stop()
 		spawn_mothership()
 
 func mothership_killed(points):
 	score += points
 	$CanvasLayer/Score.text = "%06d" % score
-	## TODO: Load next sector after all the mothership missiles are gone not when mothership is dead
-	load_next_sector()
 
 func load_next_sector():
-	## TODO: Play next level animation so the player knows when they complete one
 	sector += 1
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
-	total_enemies = 15
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	player.missiles = 3
 	avail_missiles(3)
-	if sector == 2:
+	homing_missiles_fired = 0
+	
+func start_next_sector():
+	total_enemies = 15
+	if sector >= 2:
 		$AsteroidTimer.start()
 
 func lose_life():
@@ -192,3 +207,6 @@ func _on_PlayerReloadTimer_timeout():
 func _on_AnimatedSprite_animation_finished():
 	$PowerUpClips/AnimatedSprite.visible = false
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == 'new_sector':
+		start_next_sector()
