@@ -56,6 +56,15 @@ func dmg():
 	# TODO: Death animation
 	dying = true
 	game.enemy_killed(points)
+	# 1/6 chance to drop power up
+	random.randomize()
+	var drop_powerup = random.randi_range(1,6)
+	if drop_powerup == 6:
+		var powerup_scene = preload("res://scenes/PowerUp.tscn")
+		var powerup = powerup_scene.instance()
+		powerup.global_position = Vector2(global_position.x, global_position.y)
+		get_parent().add_child(powerup)
+		powerup.spawn(current_lane_num)
 	queue_free()
 
 func find_spawn_point():

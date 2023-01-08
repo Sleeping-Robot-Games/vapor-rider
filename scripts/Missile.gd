@@ -10,12 +10,17 @@ func _ready():
 	pass
 
 func set_target(lane_index):
+	print("global_position: " + str(global_position))
+	print("lane_index: ", str(lane_index))
 	var lanes = get_tree().get_nodes_in_group('missile_lane')
 	for spawn_pos in lanes:
 		if 'Spawn'+str(lane_index) in spawn_pos.name:
 			target = spawn_pos.global_position
 
-func fire(lane_index):
+func fire(lane_index, cdrom = false):
+	if cdrom:
+		$Area2D/Sprite.visible = false
+		$Area2D/AnimatedSprite.visible = true
 	set_target(lane_index)
 	
 	var distance = position.distance_to(target)

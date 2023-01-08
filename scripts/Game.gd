@@ -80,6 +80,17 @@ func lose_life():
 	else:
 		$PlayerReloadTimer.start()
 
+func power_up(type):
+	if type == "lets_go_crazy":
+		$PowerUpClips/AnimatedSprite.visible = true
+		var lanes = get_tree().get_nodes_in_group('bottom_lane')
+		for n in range(0,5):
+			var missile_scene = preload("res://scenes/Missile.tscn")
+			var cdrom = missile_scene .instance()			
+			cdrom.global_position = Vector2(lanes[n].global_position.x, lanes[n].global_position.y + 15)
+			get_tree().get_root().get_node('Game/YSort').add_child(cdrom)
+			cdrom.fire(n + 1, true)
+
 func game_over():
 	# TODO: Implement reset option
 	$CanvasLayer/GameOver.show()
@@ -104,3 +115,7 @@ func _on_PlayerReloadTimer_timeout():
 	player.disabled = false
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.ceasefire = false
+
+
+func _on_AnimatedSprite_animation_finished():
+	$PowerUpClips/AnimatedSprite.visible = false

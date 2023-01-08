@@ -18,7 +18,6 @@ func _ready():
 	path_follow.offset = lanes[current_lane_index]
 	game.avail_missiles(missiles)
 	game.player = self
-	
 
 func get_input():
 	if disabled:
@@ -47,7 +46,7 @@ func get_input():
 		if not tween.is_active() and not shoot_on_cooldown:
 			shoot_missile()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_input()
 
 func shoot_bullet():
@@ -76,12 +75,11 @@ func spawn_projectile(projectile_scene):
 	$ShootCooldown.start()
 
 func dmg():
-	print('player dmged')
 	game.lose_life()
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false
 
-
+# apply glitch effect when changing lanes
 func _on_Tween_tween_all_completed():
 	$Sprite.material.set_shader_param("offset_texture", null)
