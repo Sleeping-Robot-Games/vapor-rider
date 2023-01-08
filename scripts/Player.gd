@@ -11,6 +11,7 @@ var prev_lane_index
 var current_lane_index = 2
 var animation: Animation
 var missiles = 3
+var disabled = false
 
 func _ready():
 	path_follow.offset = lanes[current_lane_index]
@@ -19,6 +20,8 @@ func _ready():
 	
 
 func get_input():
+	if disabled:
+		return
 	if Input.is_action_pressed("right"):
 		if not tween.is_active():
 			if current_lane_index != 4:

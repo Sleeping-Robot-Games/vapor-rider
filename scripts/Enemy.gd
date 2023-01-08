@@ -31,8 +31,7 @@ func spawn():
 	scale = Vector2(.09, .09)
 	global_position = current_lane.global_position
 	move()
-	
-	# TODO: Include optional param on where to move to
+
 func move():
 	prev_lane = current_lane
 	current_lane = find_new_lane_pos()
@@ -58,10 +57,6 @@ func dmg():
 	dying = true
 	game.enemy_killed(points)
 	queue_free()
-
-func go_home():
-	# Send enemy to spawn point of their current lane to let the player reload
-	pass
 
 func find_spawn_point():
 	random.randomize()

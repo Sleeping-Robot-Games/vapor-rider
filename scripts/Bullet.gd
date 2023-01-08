@@ -34,7 +34,7 @@ func _on_Area2D_body_entered(body):
 			player.shoot_on_cooldown = false
 			body.dmg()
 			queue_free()
-		elif not player and 'Player' in body.name:
+		elif not player and 'Player' in body.name and not body.disabled:
 			body.dmg()
 			queue_free()
 

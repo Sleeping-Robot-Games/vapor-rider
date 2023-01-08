@@ -67,11 +67,21 @@ func load_next_sector():
 	avail_missiles(3)
 
 func lose_life():
-	# All enemies go back to a spawn point
+	player.get_node('AnimationPlayer').play('die')
 	# Pause controls while it reloads the ship
+	player.disabled = true
 	# No enemies shoot during pause
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.ceasefire = true
 	lives -= 1
 	update_lives_ui()
+	if lives == 0:
+		game_over()
+	else:
+		$PlayerReloadTimer.start()
+
+func game_over():
+	$CanvasLayer/GameOver.show()
 
 func _on_BeamTimer_timeout():
 	var beam_scene = load("res://scenes/Beam.tscn")
@@ -87,3 +97,9 @@ func update_lives_ui():
 	$CanvasLayer/Life.visible = lives > 0
 	$CanvasLayer/Life2.visible = lives > 1
 	$CanvasLayer/Life3.visible = lives > 2
+
+func _on_PlayerReloadTimer_timeout():
+	player.get_node('Sprite').modulate = Color(1, 1, 1)
+	player.disabled = false
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.ceasefire = false
