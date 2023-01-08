@@ -2,7 +2,7 @@ extends Node2D
 
 var random = RandomNumberGenerator.new()
 
-var speed = 150
+var speed = 100
 
 var target = null
 var current_lane_index
