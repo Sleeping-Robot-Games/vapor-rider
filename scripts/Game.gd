@@ -8,10 +8,14 @@ var sector = 1
 var total_enemies = 15
 var score = 0
 var lives = 3
+var homing_missiles_fired = 0
+
+signal player_moved
 
 func _ready():
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
+	spawn_mothership()
 
 func _on_EnemySpawnTimer_timeout():
 	spawn_enemy()
@@ -32,12 +36,24 @@ func spawn_enemy():
 	$EnemySpawnTimer.start()
 
 func spawn_mothership():
-	## TODO: Recreate end of level gameplay Beamrider does with the mothership thing at the top of the level
 	var mothership_scene = load("res://scenes/Mothership.tscn")
 	var new_mothership = mothership_scene.instance()
 	get_node('YSort').call_deferred('add_child', new_mothership)
 	new_mothership.call_deferred('spawn')
+	$MothershipTimer.start()
+	
 
+func _on_MothershipTImer_timeout():
+	if homing_missiles_fired > 4:
+		$MothershipTimer.stop()
+	var homing_missile_scene = load('res://scenes/HomingMissile.tscn')
+	var new_h_missile = homing_missile_scene.instance()
+	# mother ship homing missiles randomly spawn from left or right and goes to the current_lane the player is in
+	get_node("YSort").call_deferred('add_child', new_h_missile)
+	new_h_missile.call_deferred('fire', player.current_lane_index + 1)
+	homing_missiles_fired += 1
+	
+	
 func spawn_astroids():
 	## TODO: After level 1 astroids spawn that go all the way down to delivery points to hit player
 	pass
@@ -115,7 +131,6 @@ func _on_PlayerReloadTimer_timeout():
 	player.disabled = false
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.ceasefire = false
-
 
 func _on_AnimatedSprite_animation_finished():
 	$PowerUpClips/AnimatedSprite.visible = false

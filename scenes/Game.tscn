@@ -235,7 +235,7 @@ modulate = Color( 1, 1, 1, 0.372549 )
 scale = Vector2( 0.8, 0.48 )
 frames = SubResource( 7 )
 animation = "prince"
-frame = 17
+frame = 1
 playing = true
 centered = false
 
@@ -260,7 +260,7 @@ position = Vector2( -0.00332642, -0.999939 )
 
 [node name="Spawns" type="Node2D" parent="YSort/EnemyPositionPoints"]
 
-[node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
+[node name="Spawn0" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["homing_missle_spawns"]]
 position = Vector2( -19, 74 )
 
 [node name="Spawn1" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
@@ -278,7 +278,7 @@ position = Vector2( 247, 42 )
 [node name="Spawn5" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["missile_lane"]]
 position = Vector2( 295, 42 )
 
-[node name="Spawn6" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns"]
+[node name="Spawn6" type="Position2D" parent="YSort/EnemyPositionPoints/Spawns" groups=["homing_missle_spawns"]]
 position = Vector2( 421, 74 )
 
 [node name="Lanes" type="Node2D" parent="YSort/EnemyPositionPoints"]
@@ -347,7 +347,6 @@ position = Vector2( 280, 210 )
 position = Vector2( 361, 209 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="BeamTimer" type="Timer" parent="."]
 wait_time = 0.7
@@ -355,6 +354,9 @@ autostart = true
 
 [node name="PlayerReloadTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
+
+[node name="MothershipTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -470,3 +472,4 @@ anims/load = SubResource( 4 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="BeamTimer" to="." method="_on_BeamTimer_timeout"]
 [connection signal="timeout" from="PlayerReloadTimer" to="." method="_on_PlayerReloadTimer_timeout"]
+[connection signal="timeout" from="MothershipTimer" to="." method="_on_MothershipTImer_timeout"]
