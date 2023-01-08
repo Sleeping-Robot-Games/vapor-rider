@@ -5,6 +5,7 @@ var shoot_on_cooldown = false
 onready var path_follow = get_parent()
 onready var tween = get_node("Tween")
 onready var game = get_node('/root/Game')
+onready var glitch_texture = load("res://shaders/glitch.png")
 
 var lanes = [0, 80.5, 161, 241.5, 322]
 var prev_lane_index
@@ -27,17 +28,17 @@ func get_input():
 			if current_lane_index != 4:
 				prev_lane_index = current_lane_index
 				current_lane_index += 1
-				
 				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
+				$Sprite.material.set_shader_param("offset_texture", glitch_texture)
 	if Input.is_action_pressed("left"):
 		if not tween.is_active():
 			if current_lane_index != 0:
 				prev_lane_index = current_lane_index
 				current_lane_index -= 1
-				
 				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
+				$Sprite.material.set_shader_param("offset_texture", glitch_texture)
 	
 	if Input.is_action_just_pressed("shoot"):
 		if not tween.is_active() and not shoot_on_cooldown:
@@ -80,3 +81,7 @@ func dmg():
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false
+
+
+func _on_Tween_tween_all_completed():
+	$Sprite.material.set_shader_param("offset_texture", null)
