@@ -20,6 +20,7 @@ func _input(event):
 		get_tree().paused = !get_tree().paused
 		$Effects/VHS.visible = get_tree().paused
 		$Effects/TV.visible = !get_tree().paused
+		$PauseLabel.visible = get_tree().paused
 	if $LoadingMenu.visible:
 		if Input.is_action_just_pressed("shoot"):
 			pass
