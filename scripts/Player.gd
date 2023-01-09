@@ -13,6 +13,7 @@ var current_lane_index = 2
 var animation: Animation
 var missiles = 3
 var disabled = false
+var has_armor = false
 
 func _ready():
 	path_follow.offset = lanes[current_lane_index]
@@ -79,9 +80,22 @@ func spawn_projectile(projectile_scene):
 	shoot_on_cooldown = true
 	$ShootCooldown.start()
 
+func chromify():
+	has_armor = true
+	$Sprite.texture = load("res://assets/player_chrome.png")
+
+func dechromify():
+	has_armor = false
+	$Sprite.texture = load("res://assets/player.png")
+	game.normal_lives()
+
 func dmg():
-	game.lose_life()
-	g.play_sfx("player_hit", 9)
+	if has_armor:
+		dechromify()
+		g.play_sfx("player_hit_armor", 9)
+	else:
+		game.lose_life()
+		g.play_sfx("player_hit", 9)
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false

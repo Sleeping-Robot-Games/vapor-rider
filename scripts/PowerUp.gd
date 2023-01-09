@@ -1,16 +1,26 @@
 extends Node2D
 
+var random = RandomNumberGenerator.new()
+
 var speed = 100
 
-var type = "lets_go_crazy"
+var type
 
 onready var game = get_node('/root/Game')
 
 var target
 
 func _ready():
-	## TODO: multiple types
-	pass
+	random.randomize()
+	var n = random.randi_range(1, 2)
+	if n == 1:
+		type = "lets_go_crazy"
+		$Area2D/AnimatedSprite.visible = true
+		$Area2D/Sprite.visible = false
+	elif n == 2:
+		type = "everything_is_chrome"
+		$Area2D/AnimatedSprite.visible = false
+		$Area2D/Sprite.visible = true
 
 func set_target(lane_index):
 	var lane_group = 'bottom_lane'

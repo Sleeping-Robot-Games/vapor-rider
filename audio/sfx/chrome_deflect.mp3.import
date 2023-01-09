@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chrome_deflect.mp3-c81613626ceac9242777a11864503d43.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx/chrome_deflect.mp3"
+dest_files=[ "res://.import/chrome_deflect.mp3-c81613626ceac9242777a11864503d43.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

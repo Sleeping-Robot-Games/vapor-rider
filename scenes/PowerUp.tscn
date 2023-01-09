@@ -1,7 +1,8 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scripts/PowerUp.gd" type="Script" id=1]
 [ext_resource path="res://assets/powerup_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/chrome.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
@@ -224,9 +225,15 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 5 )
-frame = 23
+frame = 26
 speed_scale = 2.0
 playing = true
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+visible = false
+rotation = -0.619732
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
 

@@ -162,6 +162,19 @@ func power_up(type):
 			cdrom.global_position = Vector2(lanes[n].global_position.x, lanes[n].global_position.y + 15)
 			get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', cdrom)
 			cdrom.call_deferred('fire', n + 1, true)
+	if type == "everything_is_chrome":
+		player.chromify()
+		chrome_lives()
+
+func chrome_lives():
+	$CanvasLayer/Life.texture = load("res://assets/player_chrome.png")
+	$CanvasLayer/Life2.texture = load("res://assets/player_chrome.png")
+	$CanvasLayer/Life3.texture = load("res://assets/player_chrome.png")
+
+func normal_lives():
+	$CanvasLayer/Life.texture = load("res://assets/player.png")
+	$CanvasLayer/Life2.texture = load("res://assets/player.png")
+	$CanvasLayer/Life3.texture = load("res://assets/player.png")
 
 func game_over():
 	game_over = true

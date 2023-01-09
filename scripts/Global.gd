@@ -17,5 +17,7 @@ func play_sfx(sound, dB = 0):
 		sfx.stream = load("res://audio/sfx/drink.mp3")
 	elif sound == "player_hit":
 		sfx.stream = load("res://audio/sfx/shield_critical_alarm.mp3")
+	elif sound == "player_hit_armor":
+		sfx.stream = load("res://audio/sfx/chrome_deflect.mp3")
 	
 	game.call_deferred('add_child', sfx)
