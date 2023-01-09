@@ -65,6 +65,8 @@ func spawn_enemy():
 	if living_enemies < max_enemies and total_enemies - living_enemies > 0:
 		var enemy_scene = load("res://scenes/Enemy.tscn")
 		var new_enemy = enemy_scene.instance()
+		if player.disabled:
+			new_enemy.ceasefire = true
 		get_node('YSort').call_deferred('add_child', new_enemy)
 		new_enemy.call_deferred('spawn')
 	$EnemySpawnTimer.start()
