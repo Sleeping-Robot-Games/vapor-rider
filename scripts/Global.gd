@@ -18,7 +18,7 @@ func play_sfx(sound, dB = 0):
 	elif sound == "no_more_missiles":
 		sfx.stream = load("res://audio/sfx/no_more_missiles.mp3")
 	elif sound == "H2O":
-		sfx.stream = load("res://audio/sfx/CD_pickup.mp3")
+		sfx.stream = load("res://audio/sfx/water_bottle.mp3")
 	elif sound == "lets_go_crazy":
 		sfx.stream = load("res://audio/sfx/drink.mp3")
 	elif sound == "chromify":

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/water_bottle.mp3-bf7718a6b40e1230608b95ebcb0fef93.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx/water_bottle.mp3"
+dest_files=[ "res://.import/water_bottle.mp3-bf7718a6b40e1230608b95ebcb0fef93.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
