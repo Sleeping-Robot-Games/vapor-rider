@@ -47,12 +47,13 @@ shape = SubResource( 1 )
 visible = false
 scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 5 )
+frame = 1
 speed_scale = 2.0
 playing = true
 
 [node name="Chrome" type="Sprite" parent="Area2D"]
 visible = false
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]

@@ -7,7 +7,9 @@ var player = null
 var target = null
 
 func _ready():
-	pass
+	if player and player.has_armor:
+		$Area2D/Sprite.hide()
+		$Area2D/Chrome.show()
 
 func set_target(lane_index):
 	print("global_position: " + str(global_position))
@@ -19,8 +21,9 @@ func set_target(lane_index):
 
 func fire(lane_index, cdrom = false):
 	if cdrom:
-		$Area2D/Sprite.visible = false
-		$Area2D/AnimatedSprite.visible = true
+		$Area2D/Sprite.hide()
+		$Area2D/Chrome.hide()
+		$Area2D/AnimatedSprite.show()
 	else:
 		g.play_sfx("missile", 6)
 	set_target(lane_index)
