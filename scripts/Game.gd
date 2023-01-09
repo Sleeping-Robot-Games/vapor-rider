@@ -113,6 +113,8 @@ func enemy_killed(points):
 	score += points
 	$CanvasLayer/Score.text = "%06d" % score
 	total_enemies -= 1
+	if total_enemies < 0:
+		total_enemies = 0
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	if total_enemies > 0:
 		pass
