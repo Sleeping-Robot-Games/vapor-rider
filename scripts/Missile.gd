@@ -7,13 +7,9 @@ var player = null
 var target = null
 
 func _ready():
-	if player and player.has_armor:
-		$Area2D/Sprite.hide()
-		$Area2D/Chrome.show()
+	pass
 
 func set_target(lane_index):
-	print("global_position: " + str(global_position))
-	print("lane_index: ", str(lane_index))
 	var lanes = get_tree().get_nodes_in_group('missile_lane')
 	for spawn_pos in lanes:
 		if 'Spawn'+str(lane_index) in spawn_pos.name:

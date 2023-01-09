@@ -125,6 +125,7 @@ func mothership_killed(points):
 
 func load_next_sector():
 	sector += 1
+	total_enemies = 15
 	$CanvasLayer/SectorTitle.text = "SECTOR %02d" % sector
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
@@ -133,7 +134,6 @@ func load_next_sector():
 	homing_missiles_fired = 0
 	
 func start_next_sector():
-	total_enemies = 15
 	if sector >= 2:
 		$AsteroidTimer.start()
 
