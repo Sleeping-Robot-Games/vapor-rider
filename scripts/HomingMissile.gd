@@ -19,6 +19,7 @@ onready var bottom_lanes = get_tree().get_nodes_in_group('bottom_lane')
 
 func fire():
 	# spawn
+	g.play_sfx("missile", 6)
 	random.randomize()
 	var n = random.randi_range(0,1)
 	global_position = homing_spawns[n].global_position
