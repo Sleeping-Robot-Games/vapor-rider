@@ -36,6 +36,8 @@ func _input(event):
 
 func start_game():
 	print('in start game')
+	$BGM.stream = load ("res://audio/bgm/combat.mp3")
+	$BGM.play()
 	$StartGameTimer.start()
 	yield($StartGameTimer, "timeout")
 	
@@ -150,6 +152,7 @@ func lose_life():
 
 func power_up(type):
 	if type == "lets_go_crazy":
+		g.play_sfx("H2O")
 		$PowerUpClips/AnimatedSprite.visible = true
 		$PowerUpClips/AnimatedSprite.playing = true
 		var lanes = get_tree().get_nodes_in_group('bottom_lane')
@@ -165,6 +168,8 @@ func game_over():
 	$CanvasLayer/GameOver.show()
 	$EnemySpawnTimer.stop()
 	$AsteroidTimer.stop()
+	$BGM.stream = load ("res://audio/bgm/main_menu.mp3")
+	$BGM.play()
 
 func restart_game():
 	$CanvasLayer/GameOver.hide()

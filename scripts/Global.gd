@@ -12,4 +12,7 @@ func play_sfx(sound):
 		random.randomize()
 		var n = random.randi_range(1, 5)
 		sfx.stream = load("res://audio/sfx/laser"+str(n)+".mp3")
-		game.call_deferred('add_child', sfx)
+	elif sound == "H2O":
+		sfx.stream = load("res://audio/sfx/drink.mp3")
+	
+	game.call_deferred('add_child', sfx)

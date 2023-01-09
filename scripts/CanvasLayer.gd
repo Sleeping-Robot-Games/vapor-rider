@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 onready var player = get_node('/root/Game/YSort/PlayerPath2D/PathFollow2D/Player')
+onready var bgm = get_node('/root/Game/BGM')
 onready var game = get_parent()
 
 func _ready():
@@ -9,6 +10,8 @@ func _ready():
 		return 
 	player.disabled = true
 	$LoadingMenu/AnimationPlayer.play("load")
+	bgm.stream = load("res://audio/bgm/main_menu.mp3")
+	bgm.play()
 
 func _input(event):
 	if $StartMenu.visible and not game.game_over:
