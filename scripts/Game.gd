@@ -35,7 +35,6 @@ func _input(event):
 			restart_game()
 
 func start_game():
-	print('in start game')
 	$BGM.stream = load ("res://audio/bgm/combat.mp3")
 	$BGM.play()
 	$StartGameTimer.start()
@@ -50,10 +49,11 @@ func _on_EnemySpawnTimer_timeout():
 
 func on_homing_missile_dead():
 	homing_missiles_destroyed += 1
+	print(str(homing_missiles_destroyed) + " homing missiles destroyed")
 	if homing_missiles_destroyed == 6:
 		load_next_sector()
 		$CanvasLayer/AnimationPlayer.play("new_sector")
-		print('playing new_sector')
+		homing_missiles_destroyed = 0
 
 func spawn_enemy():
 	# reset the timer in case fn is being called by a dying enemy
@@ -69,6 +69,7 @@ func spawn_enemy():
 		get_node('YSort').call_deferred('add_child', new_enemy)
 		new_enemy.call_deferred('spawn')
 	$EnemySpawnTimer.start()
+
 
 func spawn_mothership():
 	var mothership_scene = load("res://scenes/Mothership.tscn")
@@ -125,6 +126,7 @@ func mothership_killed(points):
 
 func load_next_sector():
 	sector += 1
+	$CanvasLayer/SectorTitle.text = "SECTOR %02d" % sector
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	player.missiles = 3
@@ -145,7 +147,7 @@ func lose_life():
 		enemy.ceasefire = true
 	lives -= 1
 	update_lives_ui()
-	if lives == 0:
+	if lives >= 0:
 		game_over()
 	else:
 		$PlayerReloadTimer.start()
@@ -195,8 +197,11 @@ func restart_game():
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	player.missiles = 3
 	avail_missiles(3)
+	homing_missiles_destroyed = 0
 	for enemy in get_tree().get_nodes_in_group('enemies'):
 		enemy.queue_free()
+	for mothership_parts in get_tree().get_nodes_in_group('mothership_parts'):
+		mothership_parts.queue_free()
 	player.get_node('Sprite').modulate = Color(1, 1, 1)
 	player.reset_position()
 	

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 29, 30 )
 
-[node name="Mothership" type="KinematicBody2D"]
+[node name="Mothership" type="KinematicBody2D" groups=["mothership_parts"]]
 scale = Vector2( 0.3, 0.3 )
 collision_layer = 2
 collision_mask = 2
