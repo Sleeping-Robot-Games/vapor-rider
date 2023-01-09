@@ -6,8 +6,11 @@ var player = null
 
 var target = null
 
+var item = false
+
 func _ready():
-	pass
+	if item:
+		speed = 200
 
 func set_target(lane_index):
 	var lanes = get_tree().get_nodes_in_group('missile_lane')

@@ -172,7 +172,8 @@ func power_up(type):
 		var lanes = get_tree().get_nodes_in_group('bottom_lane')
 		for n in range(0,5):
 			var missile_scene = preload("res://scenes/Missile.tscn")
-			var cdrom = missile_scene .instance()			
+			var cdrom = missile_scene .instance()
+			cdrom.item = true
 			cdrom.global_position = Vector2(lanes[n].global_position.x, lanes[n].global_position.y + 15)
 			get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', cdrom)
 			cdrom.call_deferred('fire', n + 1, true)
