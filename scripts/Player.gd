@@ -66,7 +66,7 @@ func shoot_missile():
 		missiles -= 1
 		game.avail_missiles(missiles)
 	else:
-		g.play_sfx("no_more_missiles")
+		g.play_sfx("no_more_missiles", 6)
 
 func spawn_projectile(projectile_scene):
 	var projectile = projectile_scene.instance()
