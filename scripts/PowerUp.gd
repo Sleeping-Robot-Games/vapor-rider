@@ -11,16 +11,22 @@ onready var game = get_node('/root/Game')
 var target
 
 func _ready():
+	$H2O.visible = false
+	$Chrome.visible = false
+	$W1nd0ze.visible = false
 	random.randomize()
-	var n = random.randi_range(1, 2)
+	var n = random.randi_range(1, 3)
 	if n == 1:
-		type = "lets_go_crazy"
-		$Area2D/AnimatedSprite.visible = true
-		$Area2D/Sprite.visible = false
+		type = "nectar_of_the_gods"
+		$H2O.visible = true
 	elif n == 2:
 		type = "everything_is_chrome"
-		$Area2D/AnimatedSprite.visible = false
-		$Area2D/Sprite.visible = true
+		$Chrome.visible = true
+	elif n == 3:
+		type = "lets_go_crazy"
+		$W1nd0ze.visible = true
+		
+		
 
 func set_target(lane_index):
 	var lane_group = 'bottom_lane'

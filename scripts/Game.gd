@@ -153,7 +153,19 @@ func lose_life():
 		$PlayerReloadTimer.start()
 
 func power_up(type):
-	if type == "lets_go_crazy":
+	if type == "nectar_of_the_gods":
+		if lives < 3:
+			lives += 1
+			update_lives_ui()
+			g.play_sfx("H2O", 9)
+		else:
+			## TODO: different sfx just for this?
+			g.play_sfx("no_more_missiles")
+	elif type == "everything_is_chrome":
+		g.play_sfx("chromify", 9)
+		player.chromify()
+		chrome_lives()
+	elif type == "lets_go_crazy":
 		g.play_sfx("H2O", 9)
 		$PowerUpClips/AnimatedSprite.visible = true
 		$PowerUpClips/AnimatedSprite.playing = true
@@ -164,10 +176,7 @@ func power_up(type):
 			cdrom.global_position = Vector2(lanes[n].global_position.x, lanes[n].global_position.y + 15)
 			get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', cdrom)
 			cdrom.call_deferred('fire', n + 1, true)
-	if type == "everything_is_chrome":
-		g.play_sfx("chromify", 9)
-		player.chromify()
-		chrome_lives()
+		
 
 func chrome_lives():
 	$CanvasLayer/Life.texture = load("res://assets/player_chrome.png")
