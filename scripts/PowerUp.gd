@@ -19,12 +19,15 @@ func _ready():
 	if n == 1:
 		type = "nectar_of_the_gods"
 		$H2O.visible = true
+		$H2O.monitoring = true
 	elif n == 2:
 		type = "everything_is_chrome"
 		$Chrome.visible = true
+		$Chrome.monitoring = true
 	elif n == 3:
 		type = "lets_go_crazy"
 		$W1nd0ze.visible = true
+		$W1nd0ze.monitoring = true
 
 
 func set_target(lane_index):

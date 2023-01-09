@@ -74,6 +74,6 @@ func _on_Tween_tween_all_completed():
 
 func _on_Area2D_body_entered(body):
 	if body.has_method('dmg'):
-		if "Player" in body.name:
+		if "Player" in body.name and not body.disabled:
 			body.dmg()
 			dmg()
