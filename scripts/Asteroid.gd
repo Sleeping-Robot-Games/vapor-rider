@@ -4,10 +4,13 @@ var speed = 100
 
 var target
 
+var directions = [Vector3(.4,-1,0), Vector3(.2,-1,0), Vector3(0,-1,0), Vector3(-.2,-1,0), Vector3(-.4,-1,0)]
+
 func _ready():
 	pass
 		
 func set_target(lane_index):
+	$Particles2D.process_material.set('direction', directions[int(lane_index)-1])
 	var lanes = get_tree().get_nodes_in_group('bottom_lane')
 	for lane_pos in lanes:
 		if 'Lane'+str(lane_index) in lane_pos.name:
@@ -21,7 +24,6 @@ func fire(lane_index):
 	
 	$Tween.interpolate_property(self, "position", position, target, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
-
 
 func dmg():
 	queue_free()

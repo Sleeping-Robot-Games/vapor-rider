@@ -41,7 +41,7 @@ func start_game():
 	yield($StartGameTimer, "timeout")
 	
 	$EnemySpawnTimer.start()
-	#spawn_mothership()
+	spawn_asteroid()
 	player.disabled = false
 
 func _on_EnemySpawnTimer_timeout():

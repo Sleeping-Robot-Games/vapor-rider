@@ -132,6 +132,7 @@ animations = [ {
 } ]
 
 [node name="Missile" type="Node2D"]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -144,13 +145,14 @@ scale = Vector2( 0.375, 0.375 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
 visible = false
 scale = Vector2( 0.025, 0.025 )
 frames = SubResource( 25 )
-frame = 11
+frame = 19
 playing = true
 
 [node name="Chrome" type="Sprite" parent="Area2D"]
