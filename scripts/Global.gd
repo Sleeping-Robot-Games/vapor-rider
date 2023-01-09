@@ -4,9 +4,10 @@ onready var game = get_node("/root/Game")
 
 var random = RandomNumberGenerator.new()
 
-func play_sfx(sound):
+func play_sfx(sound, dB = 0):
 	var sfx_scene = load("res://scenes/SFX.tscn")
 	var sfx = sfx_scene.instance()
+	sfx.volume_db = dB
 	
 	if sound == "laser":
 		random.randomize()
