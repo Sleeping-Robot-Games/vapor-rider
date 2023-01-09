@@ -81,6 +81,7 @@ func spawn_projectile(projectile_scene):
 
 func dmg():
 	game.lose_life()
+	g.play_sfx("player_hit", 9)
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false
