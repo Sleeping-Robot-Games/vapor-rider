@@ -5,7 +5,6 @@ var shoot_on_cooldown = false
 onready var path_follow = get_parent()
 onready var tween = get_node("Tween")
 onready var game = get_node('/root/Game')
-onready var glitch_texture = load("res://shaders/glitch.png")
 
 var lanes = [0, 80.5, 161, 241.5, 322]
 var prev_lane_index

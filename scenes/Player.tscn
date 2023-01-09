@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/fireball.tres" type="Material" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20, 11.5 )
+extents = Vector2( 12, 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "die"
@@ -49,7 +49,7 @@ hue_variation_random = 0.75
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4.76837e-07, -0.5 )
+position = Vector2( 4.76837e-07, 3 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

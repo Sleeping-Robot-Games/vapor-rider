@@ -10,12 +10,7 @@ func _ready():
 	if not player:
 		speed = 100
 		$Area2D/Sprite.hide()
-		$Area2D/Chrome.hide()
 		$Area2D/AnimatedSprite.show()
-	elif player.has_armor:
-		$Area2D/Sprite.hide()
-		$Area2D/Chrome.show()
-		$Area2D/AnimatedSprite.hide()
 
 func set_target(lane_index):
 	var lane_group = 'top_lane' if player else 'bottom_lane'

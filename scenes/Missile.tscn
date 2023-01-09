@@ -152,7 +152,7 @@ shape = SubResource( 1 )
 visible = false
 scale = Vector2( 0.025, 0.025 )
 frames = SubResource( 25 )
-frame = 11
+frame = 7
 playing = true
 
 [node name="Chrome" type="Sprite" parent="Area2D"]

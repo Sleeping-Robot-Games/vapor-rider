@@ -25,8 +25,7 @@ func _ready():
 	elif n == 3:
 		type = "lets_go_crazy"
 		$W1nd0ze.visible = true
-		
-		
+
 
 func set_target(lane_index):
 	var lane_group = 'bottom_lane'
