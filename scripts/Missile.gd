@@ -18,6 +18,7 @@ func set_target(lane_index):
 			target = spawn_pos.global_position
 
 func fire(lane_index, cdrom = false):
+	g.play_sfx("missile")
 	if cdrom:
 		$Area2D/Sprite.visible = false
 		$Area2D/AnimatedSprite.visible = true

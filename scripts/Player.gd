@@ -66,8 +66,7 @@ func shoot_missile():
 		missiles -= 1
 		game.avail_missiles(missiles)
 	else:
-		## TODO play no missile SFX
-		pass
+		g.play_sfx("no_more_missiles")
 
 func spawn_projectile(projectile_scene):
 	var projectile = projectile_scene.instance()
@@ -92,10 +91,10 @@ func dechromify():
 func dmg():
 	if has_armor:
 		dechromify()
-		g.play_sfx("player_hit_armor", 9)
+		g.play_sfx("player_hit_armor", 7)
 	else:
 		game.lose_life()
-		g.play_sfx("player_hit", 9)
+		g.play_sfx("player_hit", 7)
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false

@@ -13,11 +13,19 @@ func play_sfx(sound, dB = 0):
 		random.randomize()
 		var n = random.randi_range(1, 5)
 		sfx.stream = load("res://audio/sfx/laser"+str(n)+".mp3")
+	elif sound == "missile":
+		sfx.stream = load("res://audio/sfx/rocket_fire.mp3")
+	elif sound == "no_more_missiles":
+		sfx.stream = load("res://audio/sfx/no_more_missiles.mp3")
 	elif sound == "H2O":
 		sfx.stream = load("res://audio/sfx/drink.mp3")
+	elif sound == "chromify":
+		sfx.stream = load("res://audio/sfx/apply_chrome.mp3")
 	elif sound == "player_hit":
 		sfx.stream = load("res://audio/sfx/shield_critical_alarm.mp3")
 	elif sound == "player_hit_armor":
 		sfx.stream = load("res://audio/sfx/chrome_deflect.mp3")
+	
+	
 	
 	game.call_deferred('add_child', sfx)

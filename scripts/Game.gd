@@ -163,6 +163,7 @@ func power_up(type):
 			get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', cdrom)
 			cdrom.call_deferred('fire', n + 1, true)
 	if type == "everything_is_chrome":
+		g.play_sfx("chromify", 9)
 		player.chromify()
 		chrome_lives()
 

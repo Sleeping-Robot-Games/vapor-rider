@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/no_more_missiles.mp3-d0a00c6e2d85894943bf8522fadf57e3.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx/no_more_missiles.mp3"
+dest_files=[ "res://.import/no_more_missiles.mp3-d0a00c6e2d85894943bf8522fadf57e3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

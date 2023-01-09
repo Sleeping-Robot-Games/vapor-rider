@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/rocket_fire.mp3-28ae591adc5d6a2d9110044135374fa4.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx/rocket_fire.mp3"
+dest_files=[ "res://.import/rocket_fire.mp3-28ae591adc5d6a2d9110044135374fa4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
