@@ -1,8 +1,7 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
-[ext_resource path="res://assets/player.png" type="Texture" id=3]
 [ext_resource path="res://assets/beams.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Beam.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/pxArt.png" type="Texture" id=6]
@@ -12,7 +11,6 @@
 [ext_resource path="res://fonts/font_theme.tres" type="Theme" id=10]
 [ext_resource path="res://fonts/BarcadeBrawlRegular-plYD.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://assets/prince_spritesheet.png" type="Texture" id=12]
-[ext_resource path="res://GodotRetro/Screen Shaders/Glitch.shader" type="Shader" id=13]
 [ext_resource path="res://GodotRetro/Screen Shaders/VHS.shader" type="Shader" id=14]
 [ext_resource path="res://GodotRetro/Screen Shaders/TV.shader" type="Shader" id=15]
 
@@ -148,6 +146,9 @@ font_data = ExtResource( 11 )
 [sub_resource type="DynamicFont" id=37]
 font_data = ExtResource( 11 )
 
+[sub_resource type="StreamTexture" id=38]
+load_path = "res://.import/player.png-be2216fcaabb5c62aa2466cd9a5726a8.stex"
+
 [sub_resource type="DynamicFont" id=27]
 size = 8
 font_data = ExtResource( 11 )
@@ -279,13 +280,6 @@ shader_param/tape_wave_amount = 0.003
 shader_param/tape_crease_amount = 2.5
 shader_param/color_displacement = 1.0
 shader_param/lines_velocity = 0.1
-
-[sub_resource type="ShaderMaterial" id=35]
-shader = ExtResource( 13 )
-shader_param/_ScanLineJitter = 0.25
-shader_param/_VerticalJump = 0.01
-shader_param/_HorizontalShake = 0.0
-shader_param/_ColorDrift = 0.02
 
 [sub_resource type="Animation" id=33]
 resource_name = "new_sector"
@@ -574,18 +568,18 @@ text = "Paused"
 
 [node name="Life" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 55.4141, 234.031 )
-scale = Vector2( 0.140625, 0.140625 )
-texture = ExtResource( 3 )
+scale = Vector2( 0.4, 0.4 )
+texture = SubResource( 38 )
 
 [node name="Life2" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 72.9141, 233.531 )
-scale = Vector2( 0.140625, 0.140625 )
-texture = ExtResource( 3 )
+scale = Vector2( 0.4, 0.4 )
+texture = SubResource( 38 )
 
 [node name="Life3" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 89.9141, 233.531 )
-scale = Vector2( 0.140625, 0.140625 )
-texture = ExtResource( 3 )
+scale = Vector2( 0.4, 0.4 )
+texture = SubResource( 38 )
 
 [node name="Missile" type="ColorRect" parent="CanvasLayer"]
 modulate = Color( 0.862745, 0.0156863, 0.192157, 1 )
@@ -609,6 +603,7 @@ margin_right = 347.0
 margin_bottom = 235.0
 
 [node name="LoadingMenu" type="Node2D" parent="CanvasLayer"]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/LoadingMenu"]
 margin_right = 400.0
@@ -653,6 +648,7 @@ root_node = NodePath("../Label")
 anims/load = SubResource( 4 )
 
 [node name="StartMenu" type="Node2D" parent="CanvasLayer"]
+visible = false
 
 [node name="Space" type="Label" parent="CanvasLayer/StartMenu"]
 visible = false
@@ -702,12 +698,6 @@ margin_bottom = 240.0
 [node name="VHS" type="ColorRect" parent="CanvasLayer/Effects"]
 visible = false
 material = SubResource( 34 )
-margin_right = 400.0
-margin_bottom = 240.0
-
-[node name="Glitch" type="ColorRect" parent="CanvasLayer/Effects"]
-visible = false
-material = SubResource( 35 )
 margin_right = 400.0
 margin_bottom = 240.0
 

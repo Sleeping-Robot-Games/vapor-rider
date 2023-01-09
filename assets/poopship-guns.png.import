@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.PNG-f00859738d1571b1908d86aaf1382cd1.stex"
+path="res://.import/poopship-guns.png-3ba66742c3a50ee31e9281ad8599b244.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.PNG"
-dest_files=[ "res://.import/icon.PNG-f00859738d1571b1908d86aaf1382cd1.stex" ]
+source_file="res://assets/poopship-guns.png"
+dest_files=[ "res://.import/poopship-guns.png-3ba66742c3a50ee31e9281ad8599b244.stex" ]
 
 [params]
 

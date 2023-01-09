@@ -34,7 +34,6 @@ func get_input():
 				current_lane_index += 1
 				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
-				$Sprite.material.set_shader_param("offset_texture", glitch_texture)
 	if Input.is_action_pressed("left"):
 		if not tween.is_active():
 			if current_lane_index != 0:
@@ -42,7 +41,6 @@ func get_input():
 				current_lane_index -= 1
 				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
-				$Sprite.material.set_shader_param("offset_texture", glitch_texture)
 	
 	if Input.is_action_just_pressed("shoot"):
 		if not tween.is_active() and not shoot_on_cooldown:
@@ -85,7 +83,7 @@ func chromify():
 
 func dechromify():
 	has_armor = false
-	$Sprite.texture = load("res://assets/player.png")
+	$Sprite.texture = load("res://assets/chromify.png")
 	game.normal_lives()
 
 func dmg():
@@ -100,9 +98,7 @@ func dmg():
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false
 
-# apply glitch effect when changing lanes
+
 func _on_Tween_tween_all_completed():
-	$Sprite.material.set_shader_param("offset_texture", null)
-	
 	# Let the player shoot right after they switch lanes
 	shoot_on_cooldown = false
