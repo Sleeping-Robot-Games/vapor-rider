@@ -147,7 +147,7 @@ func lose_life():
 		enemy.ceasefire = true
 	lives -= 1
 	update_lives_ui()
-	if lives >= 0:
+	if lives <= 0:
 		game_over()
 	else:
 		$PlayerReloadTimer.start()
