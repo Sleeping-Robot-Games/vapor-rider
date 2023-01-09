@@ -14,7 +14,12 @@ func _ready():
 	bgm.play()
 
 func _input(event):
-	if $StartMenu.visible and not game.game_over:
+	if $LoadingMenu.visible:
+		if Input.is_action_just_pressed("shoot"):
+			$StartMenu/AnimationPlayer.stop()
+			$LoadingMenu.visible = false
+			$StartMenu/AnimationPlayer.play("title")
+	elif $StartMenu.visible and not game.game_over:
 		if Input.is_action_just_pressed("shoot"):
 			$StartMenu.visible = false
 			get_parent().start_game()
@@ -24,7 +29,7 @@ func play_title_menu():
 	$StartMenu/AnimationPlayer.play('title')
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == 'load':
+	if anim_name == 'load' and $LoadingMenu.visible:
 		$LoadingMenu.visible = false
 		$StartMenu/AnimationPlayer.play("title")
 	if anim_name == 'title':
