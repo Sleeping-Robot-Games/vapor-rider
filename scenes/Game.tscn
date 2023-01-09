@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://fonts/font_theme.tres" type="Theme" id=10]
 [ext_resource path="res://fonts/BarcadeBrawlRegular-plYD.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://assets/prince_spritesheet.png" type="Texture" id=12]
+[ext_resource path="res://GodotRetro/Screen Shaders/Glitch.shader" type="Shader" id=13]
+[ext_resource path="res://GodotRetro/Screen Shaders/VHS.shader" type="Shader" id=14]
+[ext_resource path="res://GodotRetro/Screen Shaders/TV.shader" type="Shader" id=15]
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
@@ -257,6 +260,30 @@ tracks/1/keys = {
 "values": [ Vector2( -165, 74 ), Vector2( 50, 74 ) ]
 }
 
+[sub_resource type="ShaderMaterial" id=34]
+shader = ExtResource( 14 )
+shader_param/tape_wave_amount = 0.003
+shader_param/tape_crease_amount = 2.5
+shader_param/color_displacement = 1.0
+shader_param/lines_velocity = 0.1
+
+[sub_resource type="ShaderMaterial" id=35]
+shader = ExtResource( 13 )
+shader_param/_ScanLineJitter = 0.25
+shader_param/_VerticalJump = 0.01
+shader_param/_HorizontalShake = 0.0
+shader_param/_ColorDrift = 0.02
+
+[sub_resource type="ShaderMaterial" id=36]
+shader = ExtResource( 15 )
+shader_param/vertJerkOpt = 0.0
+shader_param/vertMovementOpt = 0.0
+shader_param/bottomStaticOpt = 0.0
+shader_param/bottomStaticStrenth = 0.7
+shader_param/scalinesOpt = 0.8
+shader_param/rgbOffsetOpt = 0.2
+shader_param/horzFuzzOpt = 0.15
+
 [sub_resource type="Animation" id=33]
 resource_name = "new_sector"
 length = 3.0
@@ -364,6 +391,7 @@ curve = SubResource( 3 )
 position = Vector2( 37, 227 )
 
 [node name="Player" parent="YSort/PlayerPath2D/PathFollow2D" instance=ExtResource( 1 )]
+pause_mode = 2
 position = Vector2( -0.00332642, -0.999939 )
 
 [node name="EnemyPositionPoints" type="Node2D" parent="YSort"]
@@ -472,6 +500,7 @@ one_shot = true
 wait_time = 5.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
 script = ExtResource( 7 )
 
 [node name="GameOver" type="Label" parent="CanvasLayer"]
@@ -568,6 +597,7 @@ margin_right = 347.0
 margin_bottom = 235.0
 
 [node name="LoadingMenu" type="Node2D" parent="CanvasLayer"]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/LoadingMenu"]
 margin_right = 400.0
@@ -612,6 +642,7 @@ root_node = NodePath("../Label")
 anims/load = SubResource( 4 )
 
 [node name="StartMenu" type="Node2D" parent="CanvasLayer"]
+visible = false
 
 [node name="Space" type="Label" parent="CanvasLayer/StartMenu"]
 visible = false
@@ -648,6 +679,27 @@ visible = false
 position = Vector2( 112, 122 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 6 )
+
+[node name="Effects" type="Control" parent="CanvasLayer"]
+margin_right = 400.0
+margin_bottom = 240.0
+
+[node name="VHS" type="ColorRect" parent="CanvasLayer/Effects"]
+visible = false
+material = SubResource( 34 )
+margin_right = 400.0
+margin_bottom = 240.0
+
+[node name="Glitch" type="ColorRect" parent="CanvasLayer/Effects"]
+visible = false
+material = SubResource( 35 )
+margin_right = 400.0
+margin_bottom = 240.0
+
+[node name="TV" type="ColorRect" parent="CanvasLayer/Effects"]
+material = SubResource( 36 )
+margin_right = 400.0
+margin_bottom = 240.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 anims/new_sector = SubResource( 33 )

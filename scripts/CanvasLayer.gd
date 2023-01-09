@@ -16,6 +16,10 @@ func _ready():
 	bgm.play()
 
 func _input(event):
+	if Input.is_action_just_pressed("pause"):
+		get_tree().paused = !get_tree().paused
+		$Effects/VHS.visible = get_tree().paused
+		$Effects/TV.visible = !get_tree().paused
 	if $LoadingMenu.visible:
 		if Input.is_action_just_pressed("shoot"):
 			pass

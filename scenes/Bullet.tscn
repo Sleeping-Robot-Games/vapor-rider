@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/enemy_bullet.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.0
+radius = 5.0
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )

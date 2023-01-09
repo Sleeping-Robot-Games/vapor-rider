@@ -95,6 +95,7 @@ func dmg():
 	else:
 		game.lose_life()
 		g.play_sfx("player_hit", 7)
+		#TODO: Show glitch effect for like 2 seconds
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false

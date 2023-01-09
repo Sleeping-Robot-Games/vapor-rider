@@ -149,7 +149,7 @@ shape = SubResource( 1 )
 visible = false
 scale = Vector2( 0.025, 0.025 )
 frames = SubResource( 25 )
-frame = 14
+frame = 8
 playing = true
 
 [node name="Tween" type="Tween" parent="."]
