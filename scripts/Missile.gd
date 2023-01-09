@@ -1,6 +1,6 @@
 extends Node2D
 
-var speed = 200
+var speed = 400
 
 var player = null
 

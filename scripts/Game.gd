@@ -189,7 +189,8 @@ func game_over():
 func restart_game():
 	$CanvasLayer/GameOver.hide()
 	game_over = false
-	# Once all lives are lost, send back to main menu
+	score = 0
+	$CanvasLayer/Score.text = "%06d" % score
 	sector = 1
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector
 	total_enemies = 15

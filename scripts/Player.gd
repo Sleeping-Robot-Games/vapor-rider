@@ -14,6 +14,8 @@ var missiles = 3
 var disabled = false
 var has_armor = false
 
+var speed = .15
+
 func _ready():
 	path_follow.offset = lanes[current_lane_index]
 	game.avail_missiles(missiles)
@@ -31,21 +33,21 @@ func get_input():
 			if current_lane_index != 4:
 				prev_lane_index = current_lane_index
 				current_lane_index += 1
-				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
 	if Input.is_action_pressed("left"):
 		if not tween.is_active():
 			if current_lane_index != 0:
 				prev_lane_index = current_lane_index
 				current_lane_index -= 1
-				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], .2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+				tween.interpolate_property(path_follow, "offset", lanes[prev_lane_index], lanes[current_lane_index], speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				tween.start()
 	
 	if Input.is_action_just_pressed("shoot"):
-		if not tween.is_active() and not shoot_on_cooldown:
+		if not shoot_on_cooldown:
 			shoot_bullet()
 	elif Input.is_action_just_pressed("missile"):
-		if not tween.is_active() and not shoot_on_cooldown:
+		if not shoot_on_cooldown:
 			shoot_missile()
 
 func _physics_process(_delta):
