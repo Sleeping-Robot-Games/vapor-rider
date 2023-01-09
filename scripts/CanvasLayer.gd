@@ -4,6 +4,8 @@ onready var player = get_node('/root/Game/YSort/PlayerPath2D/PathFollow2D/Player
 onready var bgm = get_node('/root/Game/BGM')
 onready var game = get_parent()
 
+var canStart = false
+
 func _ready():
 	if game.debug:
 		$LoadingMenu.visible = false
@@ -17,12 +19,13 @@ func _input(event):
 	if $LoadingMenu.visible:
 		if Input.is_action_just_pressed("shoot"):
 			pass
-	elif $StartMenu.visible and not game.game_over:
+	elif $StartMenu.visible and canStart and not game.game_over:
 		if Input.is_action_just_pressed("shoot"):
 			$StartMenu.visible = false
 			get_parent().start_game()
 
 func play_title_menu():
+	canStart = false
 	$StartMenu.visible = true
 	$StartMenu/AnimationPlayer.play('title')
 
@@ -32,3 +35,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$StartMenu/AnimationPlayer.play("title")
 	if anim_name == 'title':
 		$StartMenu/Space.visible = true
+		canStart = true
