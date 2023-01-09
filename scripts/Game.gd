@@ -194,6 +194,8 @@ func restart_game():
 	total_enemies = 15
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
 	player.missiles = 3
+	lives = 3
+	update_lives_ui()
 	avail_missiles(3)
 	homing_missiles_destroyed = 0
 	for enemy in get_tree().get_nodes_in_group('enemies'):
