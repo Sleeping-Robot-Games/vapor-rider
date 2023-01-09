@@ -34,7 +34,6 @@ func fire(lane_index, cdrom = false):
 	$Tween.start()
 
 func _on_Area2D_body_entered(body):
-	print(body)
 	if body.has_method('dmg'):
 		if "Enemy" in body.name or "Mothership" in body.name or 'Asteroid' in body.name:
 			body.dmg()

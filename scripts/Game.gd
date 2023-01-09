@@ -114,7 +114,7 @@ func enemy_killed(points):
 	$CanvasLayer/Score.text = "%06d" % score
 	total_enemies -= 1
 	$CanvasLayer/Enemies.text = "%02d" % total_enemies
-	if total_enemies > 0:
+	if total_enemies >= 0:
 		pass
 		#spawn_enemy()
 	else:
