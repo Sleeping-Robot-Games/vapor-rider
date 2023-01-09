@@ -159,14 +159,14 @@ func power_up(type):
 			update_lives_ui()
 			g.play_sfx("H2O", 9)
 		else:
-			## TODO: different sfx just for this?
+			## TODO: different sfx?
 			g.play_sfx("no_more_missiles")
 	elif type == "everything_is_chrome":
 		g.play_sfx("chromify", 9)
 		player.chromify()
 		chrome_lives()
 	elif type == "lets_go_crazy":
-		g.play_sfx("H2O", 9)
+		g.play_sfx("lets_go_crazy", 9)
 		$PowerUpClips/AnimatedSprite.visible = true
 		$PowerUpClips/AnimatedSprite.playing = true
 		var lanes = get_tree().get_nodes_in_group('bottom_lane')
