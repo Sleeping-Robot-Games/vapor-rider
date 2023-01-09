@@ -603,7 +603,6 @@ margin_right = 347.0
 margin_bottom = 235.0
 
 [node name="LoadingMenu" type="Node2D" parent="CanvasLayer"]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/LoadingMenu"]
 margin_right = 400.0
@@ -648,7 +647,6 @@ root_node = NodePath("../Label")
 anims/load = SubResource( 4 )
 
 [node name="StartMenu" type="Node2D" parent="CanvasLayer"]
-visible = false
 
 [node name="Space" type="Label" parent="CanvasLayer/StartMenu"]
 visible = false

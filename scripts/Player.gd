@@ -79,12 +79,11 @@ func spawn_projectile(projectile_scene):
 
 func chromify():
 	has_armor = true
-	$Sprite.texture = load("res://assets/player_chrome.png")
+	$Sprite.frame = 1
 
 func dechromify():
 	has_armor = false
-	$Sprite.texture = load("res://assets/chromify.png")
-	game.normal_lives()
+	$Sprite.frame = 0
 
 func dmg():
 	if has_armor:

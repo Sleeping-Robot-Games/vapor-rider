@@ -164,7 +164,6 @@ func power_up(type):
 	elif type == "everything_is_chrome":
 		g.play_sfx("chromify", 9)
 		player.chromify()
-		chrome_lives()
 	elif type == "lets_go_crazy":
 		g.play_sfx("lets_go_crazy", 9)
 		$PowerUpClips/AnimatedSprite.visible = true
@@ -177,16 +176,6 @@ func power_up(type):
 			get_tree().get_root().get_node('Game/YSort').call_deferred('add_child', cdrom)
 			cdrom.call_deferred('fire', n + 1, true)
 		
-
-func chrome_lives():
-	$CanvasLayer/Life.texture = load("res://assets/player_chrome.png")
-	$CanvasLayer/Life2.texture = load("res://assets/player_chrome.png")
-	$CanvasLayer/Life3.texture = load("res://assets/player_chrome.png")
-
-func normal_lives():
-	$CanvasLayer/Life.texture = load("res://assets/player.png")
-	$CanvasLayer/Life2.texture = load("res://assets/player.png")
-	$CanvasLayer/Life3.texture = load("res://assets/player.png")
 
 func game_over():
 	game_over = true
