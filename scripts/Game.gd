@@ -209,6 +209,7 @@ func restart_game():
 		mothership_parts.queue_free()
 	player.get_node('Sprite').modulate = Color(1, 1, 1)
 	player.reset_position()
+	player.alive()
 	
 	$CanvasLayer.play_title_menu()
 
