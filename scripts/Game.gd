@@ -230,6 +230,7 @@ func update_lives_ui():
 func _on_PlayerReloadTimer_timeout():
 	player.get_node('Sprite').modulate = Color(1, 1, 1)
 	player.disabled = false
+	player.alive()
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.ceasefire = false
 

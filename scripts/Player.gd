@@ -91,9 +91,17 @@ func dmg():
 		dechromify()
 		g.play_sfx("player_hit_armor", 7)
 	else:
+		$Engine.emitting = false
+		$Exhaust.emitting = false
+		$Exhaust2.emitting = false
 		game.lose_life()
 		g.play_sfx("player_hit", 7)
 		#TODO: Show glitch effect for like 2 seconds
+
+func alive():
+	$Engine.emitting = true
+	$Exhaust.emitting = true
+	$Exhaust2.emitting = true
 
 func _on_ShootCooldown_timeout():
 	shoot_on_cooldown = false
