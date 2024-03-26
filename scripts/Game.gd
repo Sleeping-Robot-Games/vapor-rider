@@ -16,13 +16,21 @@ var between_levels = false
 var homing_missiles_fired = 0
 var homing_missiles_destroyed = 0
 
+var power_ups_collected = 0
+var kill_count = 0
+var mothership_kill_count = 0
+
 var game_over = false
 
 signal homing_missile_dead
 
+onready var http_request = $HTTPRequest
+
 func _ready():
 	if debug:
 		start_game()
+	
+	http_request.connect("request_completed", self, "_on_request_completed")
 	
 	connect("homing_missile_dead", self, 'on_homing_missile_dead')
 	
@@ -31,7 +39,8 @@ func _ready():
 
 func _input(event):
 	if game_over:
-		if Input.is_action_just_pressed("shoot"):
+		if Input.is_action_just_pressed("enter"):
+			submit_score()
 			restart_game()
 
 func start_game():
@@ -111,6 +120,7 @@ func _on_AsteroidTimer_timeout():
 
 func enemy_killed(points):
 	score += points
+	kill_count += 1
 	$CanvasLayer/Score.text = "%06d" % score
 	total_enemies -= 1
 	if total_enemies < 0:
@@ -125,6 +135,7 @@ func enemy_killed(points):
 
 func mothership_killed(points):
 	score += points
+	mothership_kill_count += 1
 	$CanvasLayer/Score.text = "%06d" % score
 
 func load_next_sector():
@@ -156,6 +167,8 @@ func lose_life():
 		$PlayerReloadTimer.start()
 
 func power_up(type):
+	score += 20
+	power_ups_collected += 1
 	if type == "nectar_of_the_gods":
 		if lives < 3:
 			lives += 1
@@ -188,11 +201,55 @@ func game_over():
 	$AsteroidTimer.stop()
 	$BGM.stream = load ("res://audio/bgm/main_menu.mp3")
 	$BGM.play()
+	
+func submit_score():
+	var username = $CanvasLayer/GameOver/LineEdit.text.to_lower()
+	if username.empty():
+		return # Don't submit a score if there's no name entered
+	var score_url = 'https://high-score-api.onrender.com/api/v1/games/65fe0a2f7dbc06d1f4b97e0c/scores'
+	var headers = ["Content-Type: application/json"]
+	var score_data = [
+		{
+			"username": username,
+			"scoreType": 'Score',
+			"score": score
+		},
+		{
+			"username": username,
+			"scoreType": 'Kills',
+			"score": kill_count
+		},
+		{
+			"username": username,
+			"scoreType": 'Power Ups',
+			"score": power_ups_collected
+		},
+		{
+			"username": username,
+			"scoreType": 'Mothership kills',
+			"score": mothership_kill_count
+		},
+		{
+			"username": username,
+			"scoreType": 'Shots fired',
+			"score": player.shots_fired
+		}
+	]
+	var json_data = JSON.print(score_data)
+	http_request.request(score_url, headers, true, HTTPClient.METHOD_POST, json_data)
+	
+func _on_request_completed(result, response_code, headers, body):
+	print(response_code)
+	
 
 func restart_game():
 	$CanvasLayer/GameOver.hide()
 	game_over = false
 	score = 0
+	power_ups_collected = 0
+	kill_count = 0
+	mothership_kill_count = 0
+	player.shots_fired = 0
 	$CanvasLayer/Score.text = "%06d" % score
 	sector = 1
 	$CanvasLayer/Sector.text = "SECTOR %02d" % sector

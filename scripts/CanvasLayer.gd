@@ -28,6 +28,13 @@ func _input(event):
 		if Input.is_action_just_pressed("shoot"):
 			$StartMenu.visible = false
 			get_parent().start_game()
+		if Input.is_action_just_pressed("h"):
+			$StartMenu.visible = false
+			$HighScores.visible = true
+	elif $HighScores.visible and canStart and not game.game_over:
+		if Input.is_action_just_pressed("shoot"):
+			$HighScores.visible = false
+			$StartMenu.visible = true
 
 func play_title_menu():
 	canStart = false
@@ -40,4 +47,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$StartMenu/AnimationPlayer.play("title")
 	if anim_name == 'title':
 		$StartMenu/Space.visible = true
+		$StartMenu/Highscores.visible = true
 		canStart = true

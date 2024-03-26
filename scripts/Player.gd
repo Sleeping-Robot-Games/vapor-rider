@@ -16,6 +16,8 @@ var has_armor = false
 
 var speed = .15
 
+var shots_fired = 0
+
 func _ready():
 	path_follow.offset = lanes[current_lane_index]
 	game.avail_missiles(missiles)
@@ -54,11 +56,13 @@ func _physics_process(_delta):
 	get_input()
 
 func shoot_bullet():
+	shots_fired += 1
 	var bullet_scene = preload("res://scenes/Bullet.tscn")
 	spawn_projectile(bullet_scene)
 	g.play_sfx("laser")
 
 func shoot_missile():
+	shots_fired += 1
 	if missiles > 0:
 		var missile_scene = preload("res://scenes/Missile.tscn")
 		spawn_projectile(missile_scene)
